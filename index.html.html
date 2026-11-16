@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Belajar dengan AI · Kelompok 1 MMDT — Revisi 6.5</title>
+<meta name="description" content="Cari alat yang tepat, gunakan AI untuk membantu berpikir, periksa kembali, dan tetap kamu yang mengambil keputusan. Prototipe mahasiswa Psikologi Unair.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1F6F5;--card:#fff;--ink:#10202A;--mut:#4A5B66;--ac:#0B6B63;--on:#fff;--am:#B45309;--acs:#D9F0EA;--ln:#D3DDE2;--g1:#BFE6DE;--g2:#FBE3B8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A1D;--card:#15262A;--ink:#E9F0F1;--mut:#A5B6BB;--ac:#5FD0C3;--on:#07201D;--am:#F2B35E;--acs:#1B3A38;--ln:#2C4348;--g1:#12403C;--g2:#3A2E14}}
+:root[data-theme="dark"]{--bg:#0D1A1D;--card:#15262A;--ink:#E9F0F1;--mut:#A5B6BB;--ac:#5FD0C3;--on:#07201D;--am:#F2B35E;--acs:#1B3A38;--ln:#2C4348;--g1:#12403C;--g2:#3A2E14}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:16px/1.55 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;border-radius:50%;filter:blur(70px);z-index:-1;pointer-events:none}body::before{width:380px;height:380px;background:var(--g1);top:-120px;left:-100px}body::after{width:320px;height:320px;background:var(--g2);right:-80px;bottom:-80px;opacity:.7}
+a{color:var(--ac)}:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+button{font:inherit;font-family:inherit;cursor:pointer}
+header.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:900px;width:100%;margin:0 auto}
+.brand{font-weight:800;font-size:17px;display:flex;align-items:center;gap:10px;flex:1}.brand i{width:14px;height:14px;border-radius:50% 45% 55% 50%;background:var(--ac);display:inline-block}
+.lk{background:transparent;border:1px solid transparent;color:var(--ink);font-weight:600;font-size:14px;min-height:44px;padding:8px 14px;border-radius:999px}.lk:hover{border-color:var(--ac)}
+main.home{flex:1;max-width:900px;width:100%;margin:0 auto;padding:12px 18px 30px;display:flex;flex-direction:column;justify-content:center}
+.eye{display:inline-block;align-self:flex-start;font-size:13px;font-weight:600;background:var(--card);border:1px solid var(--ln);border-radius:999px;padding:5px 12px;margin:0 0 12px}
+h1{font-size:clamp(34px,7vw,56px);line-height:1.08;font-weight:800;margin:0 0 10px;letter-spacing:-.02em}.lead{font-size:18px;color:var(--mut);margin:0 0 24px;max-width:560px}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.menu{grid-template-columns:1fr}}
+.tile{--c:#0B6B63;text-align:left;display:flex;gap:16px;align-items:center;background:var(--card);border:1.5px solid var(--ln);border-radius:20px;padding:18px;color:var(--ink);min-height:104px;transition:transform .18s,border-color .18s,box-shadow .18s;animation:up .5s ease both}
+.tile:nth-child(2){animation-delay:.06s}.tile:nth-child(3){animation-delay:.12s}.tile:nth-child(4){animation-delay:.18s}@keyframes up{from{opacity:0;transform:translateY(12px)}}
+.tile:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 12px 30px rgba(0,0,0,.1)}
+.ico{flex:none;width:56px;height:56px;border-radius:16px;background:color-mix(in srgb,var(--c) 16%,var(--card));color:var(--c);display:flex;align-items:center;justify-content:center}.ico svg{width:28px;height:28px}
+.tile b{display:block;font-size:19px;line-height:1.25}.tile span.d{display:block;color:var(--mut);font-size:14.5px;margin-top:2px}.tile .go{margin-left:auto;font-size:26px;color:var(--c);flex:none}
+.note{color:var(--mut);font-size:13.5px;margin:20px 0 0}
+dialog{border:0;padding:0;border-radius:24px;max-width:880px;width:calc(100% - 24px);max-height:90dvh;background:var(--card);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:hidden}
+dialog[open]{display:flex;flex-direction:column;animation:pop .22s ease}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}}
+dialog::backdrop{background:rgba(8,18,22,.6);backdrop-filter:blur(3px)}
+@media(max-width:700px){dialog{width:100%;max-width:100%;margin:auto 0 0;border-radius:24px 24px 0 0;max-height:94dvh}}
+.dh{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--ln)}.dh h2{flex:1;font-size:18px;margin:0;line-height:1.25}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid var(--ln);background:var(--card);color:var(--ink);font-size:22px;line-height:1}.ib:hover{border-color:var(--ac)}
+#dc{padding:18px;overflow:auto;flex:1}
+h3{font-size:19px;margin:0 0 6px}p{margin:0 0 10px}.mut{color:var(--mut);font-size:14px}
+.btn,.b{min-height:46px;padding:11px 20px;border-radius:12px;border:0;background:var(--ac);color:var(--on);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}.btn:hover,.b:hover{transform:translateY(-2px)}.btn.o,.b.o{background:transparent;color:var(--ink);border:1.5px solid var(--ac)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+input[type=text]{width:100%;font:inherit;padding:11px 14px;border:1.5px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--ink);min-height:46px}
+input[type=range]{width:100%;accent-color:var(--ac);min-height:44px;margin:0}label{display:block;font-weight:600;font-size:14px;margin:10px 0 4px}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--ln);border-radius:12px;padding:14px;font:14.5px/1.55 inherit;font-family:inherit;margin:10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip{min-height:40px;padding:7px 14px;border-radius:999px;border:1.5px solid var(--ln);background:var(--card);color:var(--ink);font-weight:600;font-size:13.5px}.chip:hover{border-color:var(--ac)}.chip[aria-pressed="true"]{background:var(--ac);color:var(--on);border-color:var(--ac)}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}@media(max-width:520px){.cats{grid-template-columns:1fr}}
+.cat{--c:#0B6B63;text-align:left;border:1.5px solid var(--ln);border-radius:16px;background:var(--card);color:var(--ink);padding:12px 14px;min-height:72px;display:flex;gap:12px;align-items:center}.cat:hover{border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,var(--card))}
+.cat i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}.cat b{display:block;font-size:15.5px}.cat small{color:var(--mut);font-size:13px}
+.row{border:1px solid var(--ln);border-radius:14px;margin:0 0 8px;overflow:hidden}.rh{width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:var(--card);color:var(--ink);border:0;padding:10px 14px;min-height:50px}.rn{flex:1;font-weight:700}.chev{font-size:22px;transition:transform .2s}.row.open .chev{transform:rotate(90deg)}.rb{display:none;padding:0 14px 14px}.row.open .rb{display:block}
+.badge{display:inline-block;background:var(--acs);border-radius:999px;padding:3px 12px;font-weight:600;font-size:13px}
+.hint{background:var(--acs);border-radius:12px;padding:10px 14px;font-size:14.5px;margin:10px 0}
+.dots{display:flex;gap:8px;margin-bottom:14px}.dot{flex:1;height:8px;border-radius:99px;background:var(--ln)}.dot.on{background:var(--ac)}.dl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut);margin:-8px 0 14px}
+.big{font-size:44px;font-weight:800;color:var(--ac);line-height:1}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.seg button{border:1.5px solid var(--ln);background:var(--card);color:var(--ink);border-radius:14px;padding:10px;font-weight:700;min-height:48px}.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ck{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--ln);font-size:15px;font-weight:400;margin:0}.ck input{width:22px;height:22px;margin-top:2px;accent-color:var(--ac)}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.leg div{border:1.5px solid var(--ln);border-radius:14px;padding:10px 12px;font-size:14px}.leg b{font-size:20px;margin-right:6px}
+.opt{display:grid;gap:10px}.opt .tile{min-height:88px;animation:none}
+details.dz summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}details.dz li{margin:0 0 6px;font-size:14.5px}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:999px;font-weight:600;opacity:0;transition:all .25s;z-index:2000;pointer-events:none}#toast.s{opacity:1;transform:translate(-50%,0)}
+@media(max-width:700px){.tile{min-height:88px;padding:14px}.lead{margin-bottom:16px;font-size:16.5px}main.home{padding-top:4px}}
+.brand small{display:block;font-weight:600;font-size:11.5px;color:var(--mut);line-height:1.3}
+.band{margin-top:46px}.band h2{font-size:clamp(24px,4.5vw,32px);margin:0 0 4px;font-weight:800;letter-spacing:-.01em}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 2px 8px}.nc{flex:0 0 min(300px,82%);scroll-snap-align:start;text-align:left;background:var(--card);border:1.5px solid var(--ln);border-radius:18px;padding:16px;color:var(--ink);transition:transform .18s,border-color .18s}.nc:hover{transform:translateY(-3px);border-color:var(--ac)}.nc b{display:block;margin:8px 0 4px;font-size:16.5px;line-height:1.3}.nc span.s{color:var(--mut);font-size:14px;display:block}
+.rc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}@media(max-width:700px){.rc{grid-template-columns:1fr}}.rc>div{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:16px}.rc p{color:var(--mut);font-size:14.5px;margin:4px 0 10px}
+.hope{margin-top:16px;font-weight:700;font-size:18px;color:var(--ac)}
+.why{background:var(--acs);border-radius:10px;padding:8px 12px;font-size:14px;margin:6px 0}.leg1{border:1.5px solid var(--ln);border-radius:14px;padding:12px 14px;margin:0 0 8px}.leg1 b{font-size:17px}.leg1 p{margin:4px 0}
+.opts{display:grid;gap:8px;margin:10px 0}.opts button{text-align:left;border:1.5px solid var(--ln);background:var(--card);color:var(--ink);border-radius:14px;padding:12px 14px;min-height:48px;font-weight:600}.opts button:hover{border-color:var(--ac)}.opts button.ok{background:var(--acs);border-color:var(--ac)}.opts button.no{border-color:#B91C1C}
+.ib.tx{width:auto;padding:0 14px;font-size:14px;font-weight:700}.tile.pri{grid-column:1/-1;border-color:var(--c);background:color-mix(in srgb,var(--c) 9%,var(--card));min-height:128px}.tile.pri b{font-size:23px}.tile.pri .ico{width:64px;height:64px}
+.callout{margin-top:26px;background:color-mix(in srgb,var(--am) 12%,var(--card));border:1.5px solid var(--am);border-radius:20px;padding:18px}.callout b{font-size:21px}.callout p{margin:4px 0 12px}
+@media(min-width:701px){dialog[open]{min-height:min(620px,86dvh)}}.sl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut)}
+#dtoast{display:none;align-self:center;margin:0 0 14px;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px}#dtoast.s{display:block}
+.dg{border-color:#B91C1C!important;color:#B91C1C!important}.dgf{background:#B91C1C!important;color:#fff!important}
+@media(max-width:700px){dialog[open]{height:100dvh;max-height:100dvh;border-radius:0}}
+a.tile{text-decoration:none}.tile.wide{grid-column:1/-1}
+#dtoast{position:absolute;top:64px;left:50%;transform:translateX(-50%);margin:0;padding:6px 14px;font-size:13px;z-index:6;pointer-events:none}
+.b:disabled{opacity:.45;cursor:not-allowed}.sig{font-weight:800;font-size:18px;margin:28px 0 6px;color:var(--ac)}
+.pus{margin-top:22px;background:var(--card);border:1.5px solid var(--ln);border-radius:20px;padding:16px 18px}.pus b{font-size:18px}.pus p{margin:4px 0 12px}
+.okh{border-left:4px solid #15803D}.noh{border-left:4px solid #B91C1C}.gr{border-left:6px solid #15803D}.am{border-left:6px solid #B45309}.rd{border-left:6px solid #B91C1C}
+
+/* REVISI 6 — visual simplification: editorial, calm, less card-heavy */
+:root{--bg:#F8F8F5;--card:#FFF;--ink:#172321;--mut:#687572;--ac:#176B61;--on:#FFF;--am:#A66A16;--acs:#EAF3F0;--ln:#DDE3E0;--g1:#DDEBE7;--g2:#F2E8D7}
+body::before{width:420px;height:420px;filter:blur(90px);opacity:.28;top:-220px;left:-170px}body::after{width:300px;height:300px;filter:blur(100px);opacity:.18;right:-130px;bottom:-120px}
+header.top{padding:18px 22px;max-width:980px}.brand{font-size:16px}.brand i{width:10px;height:10px;border-radius:3px;transform:rotate(45deg)}
+.lk{border-radius:10px;padding:7px 10px;color:var(--mut)}.lk:hover{border-color:transparent;background:var(--acs);color:var(--ac)}
+main.home{max-width:980px;padding:48px 22px 70px;justify-content:flex-start}
+.eye{background:transparent;border:0;border-bottom:1px solid var(--ln);border-radius:0;padding:0 0 7px;margin-bottom:18px;color:var(--ac);letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+h1{font-size:clamp(40px,6.5vw,64px);max-width:850px;letter-spacing:-.045em;margin-bottom:14px}.lead{font-size:18px;line-height:1.65;max-width:650px;margin-bottom:28px}
+.learning-flow{display:flex;align-items:center;gap:10px;margin:8px 0 34px;padding:18px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);max-width:760px}.learning-flow>div{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline;min-width:0}.learning-flow span{font:700 11px/1 "Plus Jakarta Sans";color:var(--ac);letter-spacing:.08em}.learning-flow b{font-size:15px}.learning-flow small{grid-column:2;color:var(--mut);font-size:11.5px;white-space:nowrap}.learning-flow i{font-style:normal;color:#9AA5A2;font-size:17px}
+.menu{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.tile,.tile.pri{border:0;border-radius:0;background:transparent;min-height:154px;padding:24px 22px 24px 0;box-shadow:none;animation:none}.tile:not(:first-child){border-left:1px solid var(--ln);padding-left:22px}.tile:hover,.tile.pri:hover{transform:none;border-color:var(--ln);box-shadow:none;background:rgba(23,107,97,.035)}
+.ico,.tile.pri .ico{display:none}.tile b,.tile.pri b{font-size:18px;line-height:1.3}.tile span.d{font-size:13.5px;line-height:1.55;margin-top:7px;max-width:280px}.tile .go{font-size:22px;margin-top:auto;color:var(--ac)}
+.tile.pri{grid-column:auto;border-color:transparent;background:transparent}.tile.pri b{font-size:20px}
+.note{margin-top:18px}
+.band{margin-top:64px}.band h2{font-size:22px}.strip{padding-top:8px}.nc{border:0;border-top:1px solid var(--ln);border-radius:0;background:transparent;padding:15px 0}.nc:hover{transform:none;border-color:var(--ln);background:transparent}
+/* In dialogs, use whitespace and typography as the primary grouping device. */
+#dc{padding:24px}.dh{padding:12px 18px;border-bottom:1px solid var(--ln)}dialog{border-radius:18px} .row{border:0;border-bottom:1px solid var(--ln);border-radius:0;margin:0}.rh{padding:14px 4px}.rb{padding:0 4px 16px}.badge{background:transparent;border:1px solid var(--ln);padding:3px 9px}.hint{background:var(--acs);border-radius:10px}.chips{gap:4px;margin:14px 0}.chip{border:0;background:transparent;border-radius:8px;padding:7px 10px}.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.cats{gap:0;border-top:1px solid var(--ln)}.cat{border:0;border-bottom:1px solid var(--ln);border-radius:0;background:transparent;padding:16px 4px}.cat i{width:28px;height:28px;border-radius:7px}.leg div,.leg1,.callout,.rc>div{border:1px solid var(--ln);border-radius:12px;background:transparent}.btn,.b{border-radius:9px}.btn.o,.b.o{border-color:var(--ln)}input[type=text]{border:1px solid var(--ln);border-radius:9px;background:var(--card)}
+#toast{border-radius:9px;padding:9px 14px;font-size:13px}
+@media(max-width:700px){header.top{padding:12px 16px}.brand small{display:none}main.home{padding:28px 18px 52px}h1{font-size:42px}.lead{font-size:16px}.learning-flow{gap:5px;justify-content:space-between;margin-bottom:26px}.learning-flow>div{display:block}.learning-flow span,.learning-flow small{display:block}.learning-flow b{display:block;font-size:13px;margin-top:5px}.learning-flow small{font-size:10px;margin-top:2px}.learning-flow i{font-size:14px}.menu{display:block}.tile,.tile.pri{min-height:0;padding:20px 0;border-bottom:1px solid var(--ln)}.tile:not(:first-child){border-left:0;padding-left:0}.tile b,.tile.pri b{font-size:17px}.tile span.d{max-width:none}.tile .go{position:absolute;right:2px}.tile{position:relative;padding-right:28px!important}#dc{padding:18px 16px}}
+
+/* REVISI 6.1 — expressive minimal: stronger contrast + signature visual */
+:root{--bg:#F7F7F2;--card:#FFFFFF;--ink:#14211F;--mut:#687672;--ac:#087B70;--on:#FFFFFF;--am:#B56B16;--acs:#E3F1ED;--ln:#D5DFDC;--deep:#123B37;--lime:#D8F06A}
+body{background:var(--bg)}
+body::before{width:460px;height:460px;filter:blur(80px);opacity:.22;background:#BFE8DE;top:-230px;left:-180px}
+body::after{width:340px;height:340px;filter:blur(90px);opacity:.20;background:#F2D6A7;right:-130px;bottom:-130px}
+header.top{max-width:1060px;padding:16px 24px;border-bottom:1px solid rgba(213,223,220,.7)}
+.brand i{background:var(--ac);width:11px;height:11px}
+.lk{color:var(--ink)}
+.lk:hover{background:var(--deep);color:#fff}
+main.home{max-width:1060px;padding:42px 24px 72px}
+.eye{color:var(--ac);border-bottom:2px solid var(--ac);font-weight:800}
+h1{max-width:900px;font-size:clamp(42px,7vw,72px);line-height:1.02;letter-spacing:-.055em}
+h1 em{font-style:normal;color:var(--ac)}
+.lead{font-size:19px;max-width:690px;color:#52635F;margin-bottom:30px}
+/* Signature learning path */
+.learning-flow{max-width:none;margin:8px 0 30px;padding:0;border:0;background:var(--deep);color:#fff;border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr;gap:0;align-items:stretch;box-shadow:0 18px 42px rgba(18,59,55,.16)}
+.learning-flow>div{padding:20px 18px;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline}
+.learning-flow span{color:var(--lime);font-size:12px;font-weight:800;letter-spacing:.08em}
+.learning-flow b{font-size:17px;color:#fff}.learning-flow small{grid-column:2;color:#B9D2CD;font-size:11.5px;white-space:nowrap}.learning-flow i{display:flex;align-items:center;justify-content:center;color:#6FAFA6;font-size:18px;font-style:normal}
+.learning-flow>div:last-child{background:transparent}
+/* Action area */
+.menu{grid-template-columns:1.4fr 1fr 1fr;border:0;gap:12px}
+.tile,.tile.pri{border:1px solid var(--ln);border-radius:18px;background:#fff;min-height:158px;padding:24px;box-shadow:0 5px 0 rgba(18,59,55,.04);position:relative;overflow:hidden}
+.tile:before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:var(--c,var(--ac));opacity:.95}
+.tile.pri{background:var(--deep);color:#fff;border-color:var(--deep);box-shadow:0 8px 0 rgba(18,59,55,.10)}
+.tile.pri:before{background:var(--lime)}
+.tile:not(:first-child){border-left:1px solid var(--ln);padding-left:24px}
+.tile:hover{transform:translateY(-4px);border-color:var(--ac);box-shadow:0 12px 26px rgba(18,59,55,.12);background:#fff}
+.tile.pri:hover{background:#174A45;border-color:#174A45}
+.tile b,.tile.pri b{font-size:19px}.tile.pri b{font-size:22px}.tile span.d{font-size:13.5px;line-height:1.55;margin-top:8px}.tile.pri span.d{color:#C4D8D4}.tile .go{color:var(--ac)}.tile.pri .go{color:var(--lime)}
+/* A small visual accent instead of more cards */
+.pus{background:#E9F3F0;border:0;border-left:5px solid var(--ac);border-radius:14px;padding:16px 18px;margin-top:18px}.pus b{font-size:17px}.pus .btn{margin-top:2px}
+.band{margin-top:62px}.band h2{font-size:24px}.strip{gap:24px}.nc{background:transparent;border:0;border-top:2px solid var(--ink);padding:14px 0 8px}.nc:hover{background:#fff;padding-left:10px;padding-right:10px;border-color:var(--ink)}
+/* Stronger dialog header */
+dialog{border-radius:20px} .dh{background:var(--deep);color:#fff;border:0;padding:12px 16px}.dh h2{color:#fff}.dh .ib{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)}
+#dc{background:var(--card)}
+/* Tool directory */
+#dc .row{border-bottom:1px solid var(--ln)}
+#dc .rh{padding:15px 4px}.badge{color:var(--ac);font-weight:800}
+#dc .hint{background:#EEF5F2;border-left:4px solid var(--ac)}
+.chip{border:1px solid var(--ln);background:#fff}.chip[aria-pressed="true"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+input[type=text]{background:#fff;border:2px solid var(--ln);font-size:15px;padding:13px 15px}input[type=text]:focus{border-color:var(--ac);outline:none;box-shadow:0 0 0 4px rgba(8,123,112,.10)}
+/* Rules: make semantic states visibly distinct */
+.leg1.gr{background:#EEF8F2;border-color:#9CC9AC}.leg1.am{background:#FFF6E8;border-color:#E1B56D}.leg1.rd{background:#FFF0F0;border-color:#D99A9A}
+/* Learning screen signature */
+.big{font-size:58px;color:var(--deep);letter-spacing:-.05em}.dots .dot.on{background:var(--ac)}
+.callout{background:#FFF5DD;border:0;border-left:5px solid var(--am)}
+#toast{background:var(--deep);border-radius:10px}
+@media(max-width:700px){
+ header.top{padding:12px 16px}.lk{padding:7px 8px;font-size:13px}.brand{font-size:15px}
+ main.home{padding:30px 18px 52px}h1{font-size:43px}.lead{font-size:16.5px}
+ .learning-flow{grid-template-columns:1fr 18px 1fr 18px 1fr 18px 1fr;border-radius:16px}.learning-flow>div{padding:15px 8px;display:block}.learning-flow span,.learning-flow b,.learning-flow small{display:block}.learning-flow b{font-size:13px;margin-top:5px}.learning-flow small{font-size:9px;margin-top:2px;white-space:normal;line-height:1.25}.learning-flow i{font-size:13px}
+ .menu{display:block}.tile,.tile.pri{min-height:0;padding:20px 18px!important;margin-bottom:10px}.tile:not(:first-child){border-left:1px solid var(--ln)}.tile.pri{padding:22px 18px!important}.tile b,.tile.pri b{font-size:18px}.tile.pri b{font-size:20px}
+}
+
+/* REVISI 6.2 — theme contrast fix */
+:root{
+  --bg:#F6F4EE;--card:#FFFFFF;--ink:#172321;--mut:#53635F;
+  --ac:#0F766E;--on:#FFFFFF;--am:#A65F12;--acs:#E2F1ED;
+  --ln:#CDD8D4;--g1:#CFE6DF;--g2:#F0DFC3;
+}
+:root[data-theme="dark"]{
+  --bg:#091719;--card:#122628;--ink:#F1F7F5;--mut:#A9BCB8;
+  --ac:#63D3C5;--on:#06201D;--am:#F1B35C;--acs:#173B37;
+  --ln:#2D4547;--g1:#123B37;--g2:#3B2B16;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#091719;--card:#122628;--ink:#F1F7F5;--mut:#A9BCB8;
+    --ac:#63D3C5;--on:#06201D;--am:#F1B35C;--acs:#173B37;
+    --ln:#2D4547;--g1:#123B37;--g2:#3B2B16;
+  }
+}
+/* Make the theme switch itself legible in both modes. */
+.lk{color:var(--ink)}
+.lk:hover{background:var(--acs);color:var(--ac);border-color:transparent}
+/* Stronger hierarchy for the light theme without making it colorful. */
+.tile:not(.pri),.pus,.nc,.rc>div{background:var(--card)}
+.tile:not(.pri){border-top:3px solid var(--ac)}
+.tile:nth-child(3){border-top-color:#C44778}
+.callout{background:color-mix(in srgb,var(--am) 10%,var(--card));}
+/* Dark theme: keep cards dark; never let the light-theme white card leak through. */
+:root[data-theme="dark"] .tile:not(.pri),
+:root[data-theme="dark"] .pus,
+:root[data-theme="dark"] .nc,
+:root[data-theme="dark"] .rc>div,
+:root[data-theme="dark"] dialog,
+:root[data-theme="dark"] .rh,
+:root[data-theme="dark"] .opts button,
+:root[data-theme="dark"] .seg button,
+:root[data-theme="dark"] .cat,
+:root[data-theme="dark"] input[type=text],
+:root[data-theme="dark"] .chip{
+  background:var(--card);color:var(--ink);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .tile:not(.pri),
+  :root:not([data-theme="light"]) .pus,
+  :root:not([data-theme="light"]) .nc,
+  :root:not([data-theme="light"]) .rc>div,
+  :root:not([data-theme="light"]) dialog,
+  :root:not([data-theme="light"]) .rh,
+  :root:not([data-theme="light"]) .opts button,
+  :root:not([data-theme="light"]) .seg button,
+  :root:not([data-theme="light"]) .cat,
+  :root:not([data-theme="light"]) input[type=text],
+  :root:not([data-theme="light"]) .chip{
+    background:var(--card);color:var(--ink);
+  }
+}
+
+/* REVISI 6.3 — calmer flow + clearer quiz feedback + cleaner contact */
+.learning-flow>div:last-child{background:transparent}
+.hint.noh{background:#FDECEC;border-left:4px solid #B91C1C;color:#7F1D1D}
+.hint.okh{background:#E8F5EE;border-left:4px solid #15803D;color:#166534}
+:root[data-theme="dark"] .hint.noh{background:#3A1E21;border-left-color:#F06A6A;color:#FFD7D7}
+:root[data-theme="dark"] .hint.okh{background:#17382D;border-left-color:#5FD18A;color:#CFF7DD}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .hint.noh{background:#3A1E21;border-left-color:#F06A6A;color:#FFD7D7}
+  :root:not([data-theme="light"]) .hint.okh{background:#17382D;border-left-color:#5FD18A;color:#CFF7DD}
+}
+
+
+/* REVISI 6.4 — final contrast pass: readable in light + dark, calmer news cards */
+:root{
+  --bg:#F6F4EE;--card:#FFFFFF;--ink:#172321;--mut:#52625E;
+  --ac:#087B70;--on:#FFFFFF;--am:#A65F12;--acs:#E4F2EE;
+  --ln:#C9D5D1;--deep:#123B37;--deep2:#174A45;--lime:#D8F06A;
+  --soft:#EAF3F0;--soft2:#F2F5F2;
+}
+:root[data-theme="dark"]{
+  --bg:#091719;--card:#122628;--ink:#F3F8F6;--mut:#B6C7C3;
+  --ac:#67D8CA;--on:#06201D;--am:#F2B35E;--acs:#193C38;
+  --ln:#345052;--deep:#123B37;--deep2:#1A4B45;--lime:#D8F06A;
+  --soft:#183633;--soft2:#162C2E;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#091719;--card:#122628;--ink:#F3F8F6;--mut:#B6C7C3;
+    --ac:#67D8CA;--on:#06201D;--am:#F2B35E;--acs:#193C38;
+    --ln:#345052;--deep:#123B37;--deep2:#1A4B45;--lime:#D8F06A;
+    --soft:#183633;--soft2:#162C2E;
+  }
+}
+
+/* Core text contrast: no hard-coded light-theme gray on dark backgrounds. */
+.lead,.mut,.note,.tile span.d,.nc span.s,.hope{color:var(--mut)}
+.big{color:var(--ac)}
+.learning-flow{background:var(--deep);color:#fff}
+.learning-flow b{color:#fff}.learning-flow small{color:#C2D9D5}.learning-flow i{color:#79BDB4}
+
+/* Cards and informational blocks follow the active theme. */
+.tile:not(.pri),.pus,.nc,.rc>div{background:var(--card);color:var(--ink)}
+.tile:not(.pri):hover{background:var(--card)}
+.tile.pri{background:var(--deep);color:#fff;border-color:var(--deep)}
+.tile.pri:hover{background:var(--deep2);border-color:var(--deep2)}
+.tile.pri span.d{color:#C7DBD7}
+.pus{background:var(--soft);border-left-color:var(--ac)}
+.callout{background:var(--soft2);color:var(--ink);border-left-color:var(--am)}
+#dc{background:var(--card);color:var(--ink)}
+
+/* News: three comfortable cards on desktop, roomy copy, no cramped fourth sliver. */
+.strip{gap:24px;overflow-x:auto;padding:12px 2px 10px}
+.nc{flex:0 0 calc((100% - 48px)/3);min-height:180px;border:1px solid var(--ln);border-top:3px solid var(--ink);border-radius:14px;padding:20px 20px 18px;line-height:1.55;}
+.nc b{font-size:17px;line-height:1.38;margin:10px 0 7px}
+.nc span.s{font-size:14px;line-height:1.55}
+.nc:hover{background:var(--soft);padding-left:20px;padding-right:20px;border-color:var(--ac);border-top-color:var(--ac)}
+
+/* Modal controls + form fields. */
+.dh{background:var(--deep);color:#fff}.dh h2{color:#fff}
+.dh .ib{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.28)}
+input[type=text],.chip,.opts button,.seg button,.cat{background:var(--card);color:var(--ink)}
+input[type=text]{border-color:var(--ln)}
+.chip{border-color:var(--ln)}
+.chip[aria-pressed="true"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+#dc .hint{background:var(--soft);color:var(--ink);border-left-color:var(--ac)}
+
+/* Rules: semantic meaning stays colored, but text remains readable in either theme. */
+.leg1.gr{background:#EEF8F2;border-color:#9CC9AC;color:#173B28}
+.leg1.am{background:#FFF6E8;border-color:#E1B56D;color:#57380F}
+.leg1.rd{background:#FFF0F0;border-color:#D99A9A;color:#5F2020}
+:root[data-theme="dark"] .leg1.gr{background:#17382D;border-color:#3F8A61;color:#D8F7E3}
+:root[data-theme="dark"] .leg1.am{background:#3A2B16;border-color:#9A6B2E;color:#FFE5B5}
+:root[data-theme="dark"] .leg1.rd{background:#3A1E21;border-color:#A8545B;color:#FFD7D7}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .leg1.gr{background:#17382D;border-color:#3F8A61;color:#D8F7E3}
+  :root:not([data-theme="light"]) .leg1.am{background:#3A2B16;border-color:#9A6B2E;color:#FFE5B5}
+  :root:not([data-theme="light"]) .leg1.rd{background:#3A1E21;border-color:#A8545B;color:#FFD7D7}
+}
+.leg1 .mut{color:inherit;opacity:.78}
+
+/* Quiz feedback: clear semantic red/green surface, not just a red border. */
+.hint.noh{background:#FDECEC;border-left:4px solid #B91C1C;color:#7F1D1D}
+.hint.okh{background:#E8F5EE;border-left:4px solid #15803D;color:#166534}
+:root[data-theme="dark"] .hint.noh{background:#3A1E21;border-left-color:#F06A6A;color:#FFD7D7}
+:root[data-theme="dark"] .hint.okh{background:#17382D;border-left-color:#5FD18A;color:#CFF7DD}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .hint.noh{background:#3A1E21;border-left-color:#F06A6A;color:#FFD7D7}
+  :root:not([data-theme="light"]) .hint.okh{background:#17382D;border-left-color:#5FD18A;color:#CFF7DD}
+}
+
+/* Small status elements inherit the active theme instead of disappearing. */
+#toast{background:var(--deep);color:#fff}
+.bar{background:var(--ln)}.bar i{background:var(--ac)}
+
+@media(max-width:700px){
+  .nc{flex-basis:86%;min-height:0;padding:18px}
+  .nc:hover{padding-left:18px;padding-right:18px}
+  .strip{gap:14px}
+}
+
+/* REVISI 6.5 — balanced actions + unmistakable quiz feedback */
+.b{min-height:44px;padding:10px 16px;border-radius:9px;font-size:15px;line-height:1.2}
+.b.sm{min-height:40px;padding:8px 13px;font-size:14px;font-weight:700}
+.acts{gap:8px}
+
+/* Quiz answers: the whole answer becomes semantic feedback, not only the outline. */
+.opts button.ok{background:#E8F5EE;border:1.5px solid #15803D;color:#14532D;box-shadow:inset 4px 0 0 #15803D}
+.opts button.no{background:#FDECEC;border:1.5px solid #B91C1C;color:#7F1D1D;box-shadow:inset 4px 0 0 #B91C1C}
+:root[data-theme="dark"] .opts button.ok{background:#17382D;border-color:#5FD18A;color:#D8F7E3;box-shadow:inset 4px 0 0 #5FD18A}
+:root[data-theme="dark"] .opts button.no{background:#3A1E21;border-color:#F06A6A;color:#FFD7D7;box-shadow:inset 4px 0 0 #F06A6A}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .opts button.ok{background:#17382D;border-color:#5FD18A;color:#D8F7E3;box-shadow:inset 4px 0 0 #5FD18A}
+  :root:not([data-theme="light"]) .opts button.no{background:#3A1E21;border-color:#F06A6A;color:#FFD7D7;box-shadow:inset 4px 0 0 #F06A6A}
+}
+.opts button.ok:hover,.opts button.no:hover{transform:none}
+@media(max-width:700px){.b{min-height:44px;padding:10px 14px}.b.sm{min-height:40px;padding:8px 12px}.acts{gap:8px}}
+</style></head>
+<body>
+<header class="top"><span class="brand"><i aria-hidden="true"></i><span>Belajar dengan AI<small>Kelompok 1 MMDT · Magister Psikologi Angkatan 2026</small></span></span><button class="lk" data-go="news">Kabar AI</button><button class="lk" data-go="about">Tentang</button><button class="lk" id="tema" aria-pressed="false" aria-label="Aktifkan mode gelap">☾ Gelap</button></header>
+<main class="home">
+<h1>Belajar dengan AI, <em>tetap kamu yang pegang kendali.</em></h1>
+<p class="lead">Cari alat yang tepat, gunakan AI untuk membantu berpikir, lalu cek kembali sebelum percaya.</p><div class="learning-flow" aria-label="Alur belajar dengan AI"><div><span>01</span><b>Coba</b><small>apa yang kamu tahu</small></div><i aria-hidden="true">→</i><div><span>02</span><b>Tanya</b><small>gunakan AI</small></div><i aria-hidden="true">→</i><div><span>03</span><b>Periksa</b><small>cek sumber</small></div><i aria-hidden="true">→</i><div><span>04</span><b>Putuskan</b><small>tetap kamu</small></div></div>
+<div class="menu">
+<button class="tile pri" style="--c:#2F5FD0" data-go="learn"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a3 3 0 013 3v11a2 2 0 00-2-2H4zM20 5h-6a3 3 0 00-3 3v11a2 2 0 012-2h7z"/></svg></span><span><b>Coba dulu, baru tanya AI</b><span class="d">Mulai dari apa yang kamu tahu, gunakan AI untuk membantu, lalu cek jawabannya sebelum percaya.</span></span><span class="go" aria-hidden="true">›</span></button>
+<button class="tile" style="--c:#0B6B63" data-go="ai"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span><span><b>Cari alat untuk tugasmu</b><span class="d">Temukan alat untuk membaca, mencari paper, mengolah data, menulis, dan lainnya.</span></span><span class="go" aria-hidden="true">›</span></button>
+<button class="tile" style="--c:#B4326E" data-go="rules"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><b>Cek aturan AI</b><span class="d">Apa yang boleh, tergantung tugas, atau tidak boleh? Lihat dasarnya.</span></span><span class="go" aria-hidden="true">›</span></button>
+</div>
+<section class="pus"><b>Butuh bahan belajar?</b><p>Pustaka Belajar adalah folder daftar referensi dan materi belajar. Jika diminta masuk, gunakan email institusi UNAIR.</p><a class="btn" href="https://drive.google.com/drive/folders/1inNk9Dazz1a5_-_j2anrCx-5-sIYMvRu?usp=sharing" target="_blank" rel="noopener">Buka Pustaka Belajar ↗</a> <a class="btn o" href="https://forms.gle/cXRGh57PWx9yigH2A" target="_blank" rel="noopener">Ajukan permintaan referensi ↗</a></section>
+<section class="callout"><b>Jawaban rapi belum tentu benar.</b><p>AI bisa terdengar yakin meski salah. Biasakan cek sumber sebelum percaya.</p><button class="b o" data-go="learn">Latihan mengecek jawaban</button></section>
+<section class="band"><h2>Kabar AI yang perlu kamu tahu</h2><p class="mut">Berita singkat tentang AI, akademik, dan cara memakainya dengan aman.</p><div class="strip" id="strip"></div><p style="margin-top:6px"><button class="b o" data-go="news">Lihat kabar AI</button></p></section>
+<section class="band"><h2>Coba cek pemahamanmu</h2><p class="mut">5 soal singkat tentang penggunaan AI dalam belajar. <b id="qb"></b></p><p><button class="b" data-go="quiz">Mulai kuis</button></p></section>
+<section class="band"><h2>Dibuat dari masalah nyata mahasiswa</h2><p class="mut">Dari wawancara dengan dosen dan mahasiswa psikologi, kami menemukan tiga akar masalah: sumber tepercaya yang tersebar, batas AI yang berbeda tiap dosen, dan satu cara belajar yang tidak cocok untuk semua.</p>
+<p class="hope">AI boleh membantu. Kamu tetap yang memahami, memeriksa, dan bertanggung jawab atas hasilnya.</p><p><button class="b o" data-go="proses">Lihat proses desain</button></p></section>
+<p class="sig">Coba dulu. Tanya AI. Periksa. Putuskan sendiri.</p><p class="note">Prototipe yang kami ujikan kepada mahasiswa. Ringkasan buatan mahasiswa, bukan aturan resmi; batas penggunaan AI ditetapkan dosen. Kelompok 1 MMDT (Mental Model and Design Thinking), Magister Psikologi Angkatan 2026.</p>
+</main>
+<dialog id="dlg" aria-labelledby="dt"><div class="dh"><button class="ib tx" id="bk">← Kembali</button><h2 id="dt"></h2><button class="ib tx" id="cl">Tutup</button></div><div id="dc"></div><div id="dtoast" role="status" aria-live="polite"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+var LINKS={pustaka:"https://drive.google.com/drive/folders/1inNk9Dazz1a5_-_j2anrCx-5-sIYMvRu?usp=sharing",isu:"",email:"vania.vashti.ramadhani.psikologi-2026@student.unair.ac.id",aturan:"https://drive.google.com/drive/folders/1NOu0TgdoWwnUvWegCSSU42MLfgm_GLOs?usp=sharing",form:"https://forms.gle/cXRGh57PWx9yigH2A",bem:"https://www.instagram.com/bemkmpsikologiunair/"},TIM="Kelompok 1 MMDT, Magister Psikologi Angkatan 2026";
+var GR="Gratis",FR="Ada paket gratis",PD="Berbayar atau uji coba",CK="Cek akses di sumber resmi",CS="Cek paket di situs resminya",NS="http://www.w3.org/2000/svg";
+var MAP=[
+{t:"Memahami materi",h:172,s:"L",y:90,w:"AI bisa terdengar yakin padahal keliru. Cocokkan jawabannya ke file atau sumber asli.",k:[["Gemini Notebook (NotebookLM)","Bertanya dan merangkum dari file yang kamu unggah, dengan kutipan ke sumber.","Gratis dengan akun Google","https://notebooklm.google.com"],["ChatGPT","Teman belajar terarah. Study Mode (ada di semua paket) memandu belajar bertahap. Susun prompt: Context, Task, Exemplar, Persona, Tone, Format.",FR,"https://chatgpt.com"],["Claude","Menjelaskan konsep bertahap dan menguji pemahamanmu lewat tanya jawab.",FR,"https://claude.ai"],["Perplexity","Jawaban dengan tautan sumber untuk orientasi cepat. Buka sumbernya.",CS,"https://www.perplexity.ai"],["Anki","Kartu ulang berjarak untuk melatih mengingat tanpa melihat.","Gratis di desktop","https://apps.ankiweb.net"]]},
+{t:"Menelusuri literatur",h:205,s:"L",y:240,w:"Hasil pencarian AI belum tentu lengkap. Gabungkan dengan penelusuran manual dan cek jurnal predator.",k:[["Scopus AI","Meringkas dan menjelajahi topik dari basis data Scopus.",CK,"https://www.scopus.com"],["Undermind","Pencarian literatur yang memperkirakan kelengkapan hasilnya.",CK,"https://www.undermind.ai"],["Elicit","Memetakan temuan, mengekstrak data artikel, membantu tinjauan sistematis dan diagram PRISMA.",FR,"https://elicit.com"],["Scite","Melihat apakah sitasi mendukung atau membantah klaim, menilai kualitas literatur.",PD,"https://scite.ai"],["Consensus","Jawaban berbasis temuan paper untuk pertanyaan penelitian.",FR,"https://consensus.app"],["Semantic Scholar","Mencari paper dengan ringkasan singkat dan sitasi.","Gratis","https://www.semanticscholar.org"],["Google Scholar","Mencari paper dan melihat siapa yang mengutipnya.","Gratis","https://scholar.google.com"],["Rayyan","Menyaring artikel untuk tinjauan sistematis dan scoping review.",CS,"https://www.rayyan.ai"]]},
+{t:"Memetakan literatur",h:250,s:"L",y:400,w:"Peta sitasi membantu menemukan paper terkait, bukan menilai mutu paper.",k:[["Research Rabbit","Memetakan paper terkait dan jejaring penulis, terhubung ke Zotero.",FR,"https://www.researchrabbit.ai"],["Connected Papers","Grafik kemiripan antar paper dari satu paper awal.",FR,"https://www.connectedpapers.com"],["Litmaps","Peta literatur dari jaringan sitasi dan notifikasi paper baru.",CK,"https://www.litmaps.com"],["VOSviewer","Visualisasi jaringan bibliometrik dan klaster topik.",GR,"https://www.vosviewer.com"],["Open Knowledge Maps","Memetakan topik dari kata kunci untuk orientasi bidang.",CK,"https://openknowledgemaps.org"],["Inciteful","Menjelajah jaringan sitasi untuk menemukan paper kunci.",CK,"https://inciteful.xyz"],["Bibliometrix","Paket R untuk analisis bibliometrik.",GR,"https://www.bibliometrix.org"],["CiteSpace","Visualisasi tren dan klaster literatur, versi dasar tersedia.",CK]]},
+{t:"Mengelola referensi",h:285,s:"L",y:550,w:"Pilih satu pengelola referensi dan pakai konsisten sejak awal. Simpan catatan bacamu di sana juga.",k:[["Zotero","Mengelola dan mensitasi referensi, dengan folder.","Gratis (penyimpanan awan terbatas)","https://www.zotero.org"],["Mendeley","Pengelola referensi.",CK,"https://www.mendeley.com"],["EndNote","Pengelola referensi.",CK,"https://endnote.com"],["Paperpile","Pengelola referensi yang terhubung ke Google Docs.",PD,"https://paperpile.com"],["Obsidian","Catatan baca yang saling terhubung dari bacaanmu.","Gratis untuk pemakaian pribadi","https://obsidian.md"],["Citavi","Pengelola referensi dan penyusun pengetahuan.",CS,"https://www.citavi.com"]]},
+{t:"Analisis data",h:330,s:"R",y:90,w:"Jangan unggah data peserta atau data penelitian rahasia ke AI di luar kendali kampus. Jalankan dan periksa sendiri hasilnya.",k:[["JASP","Antarmuka klik. Modul tambahan seperti SEM, Network, dan Meta-Analysis tersedia.",GR,"https://jasp-stats.org"],["jamovi","Antarmuka klik dengan perpustakaan modul, misalnya GAMLj, medmod, SEMLj, jpower, dan Rj Editor. Cek namanya di dalam aplikasi.",GR,"https://www.jamovi.org"],["SPSS","Analisis kuantitatif dasar sampai menengah.",PD,"https://www.ibm.com/products/spss-statistics"],["RStudio","Analisis lanjut dan simulasi dengan R.",GR,"https://posit.co/download/rstudio-desktop/"],["PsychoPy","Menyusun eksperimen psikologi.",GR,"https://www.psychopy.org"],["LimeSurvey","Membuat survei daring.",CK,"https://www.limesurvey.org"],["Google Colab","Menjalankan Python di peramban tanpa instalasi.","Gratis dengan batas pemakaian","https://colab.research.google.com"],["Atlas.ti, NVivo, MAXQDA","Analisis kualitatif. Alat lanjutan lain yang dipakai di riset psikologi antara lain Mplus, AMOS, SmartPLS, Lisrel, dan winsteps.",CK],["Asisten AI untuk sintaks","Claude atau ChatGPT menjelaskan dan menulis sintaks R atau Python. Tinjau tiap barisnya.",FR,"https://claude.ai"]]},
+{t:"Menulis dan merapikan",h:18,s:"R",y:240,w:"Merapikan bahasa boleh dibantu. Argumen dan penilaianmu tetap ditulis sendiri, dan ikuti batas dosen.",k:[["Panduan APA 2020","Tata bahasa, tabel, parafrase, dan pengutipan (bab 4, 7, 8, 10).",CK],["Paperpal","Merapikan tata bahasa tulisan akademik.",FR,"https://paperpal.com"],["Grammarly","Memeriksa tata bahasa.",FR,"https://www.grammarly.com"],["QuillBot","Parafrase. Tulis ulang dengan kata sendiri.",FR,"https://quillbot.com"],["Checklist JARS 2020","Daftar periksa pelaporan kuantitatif, kualitatif, dan campuran.",CK],["Writefull","Umpan balik bahasa untuk tulisan akademik.",CS,"https://www.writefull.com"],["KBBI Daring","Memeriksa kata baku bahasa Indonesia.","Gratis","https://kbbi.kemdikbud.go.id"],["Overleaf","Menulis LaTeX bersama secara daring.","Ada paket gratis","https://www.overleaf.com"],["AI untuk kritik logika","Minta Gemini, ChatGPT, atau Claude mengkritik argumenmu dan menunjukkan celahnya, bukan menulis ulang untukmu.",FR]]},
+{t:"Etika dan kejujuran",h:38,s:"R",y:400,w:"Hasil AI detector tidak boleh menjadi satu-satunya dasar menetapkan pelanggaran (Perrek 24/2026). Terbuka soal bantuan AI adalah bagian dari etika.",k:[["CANGARU","Daftar periksa pelaporan penggunaan AI generatif dalam penelitian.",CK],["Peraturan Rektor UNAIR 24/2026","Dasar penggunaan AI: batas ditetapkan dosen, deklarasi bila dipersyaratkan.","Dokumen resmi"],["WHO CIOMS dan APA","Pedoman etika penelitian.",CK],["Authorship (ICMJE 2018)","Kriteria penulis dan pengakuan kontribusi.",CK],["KEPK FPsi UNAIR","Kaji etik penelitian di fakultas.",CK],["COPE","Panduan etika publikasi, termasuk soal AI dan kepenulisan.","Gratis","https://publicationethics.org"],["DOAJ","Memeriksa apakah jurnal terdaftar dan bereputasi.","Gratis","https://doaj.org"],["Creative Commons","Izin memakai gambar, tabel, dan instrumen.","Gratis","https://creativecommons.org/share-your-work/cclicenses/"],["OSF","Pra-registrasi dan berbagi protokol atau data.","Gratis","https://osf.io"],["Turnitin dan Sapling","Cek kemiripan dan deteksi tulisan AI. Hasilnya bukan bukti tunggal.",CK]]},
+{t:"Presentasi dan mind map",h:95,s:"R",y:550,w:"Pastikan isinya kamu pahami. Desain tidak menggantikan pemahaman.",k:[["Canva","Desain presentasi.",FR,"https://www.canva.com"],["MindMeister","Membuat mind map.",FR,"https://www.mindmeister.com"],["Xmind","Membuat mind map.",FR,"https://xmind.app"],["Gamma","Draf presentasi otomatis. Rapikan dan pahami isinya sendiri.",CS,"https://gamma.app"],["Miro","Papan kolaborasi untuk peta konsep.","Ada paket gratis","https://miro.com"],["Excalidraw","Diagram sederhana bergaya tangan.","Gratis","https://excalidraw.com"]]}];
+var P={baca:{e:"Yang akan terjadi: AI merangkum dari file-mu lengkap dengan nama file dan halaman. Tugasmu mencocokkannya.",p:"Peran: pembimbing membaca. Gunakan hanya file yang saya unggah. Ringkas bagian {x} menjadi 5 poin. Untuk setiap poin, sebutkan nama file dan nomor halaman. Jika sesuatu tidak ada di file, tulis “tidak ditemukan di file” dan jangan menebak."},
+uji:{e:"Yang akan terjadi: AI bertanya dulu apa yang kamu tahu dan seberapa yakin. Kamu menjawab dulu, baru AI mengoreksi.",p:"Peran: penguji pemahaman. Jangan beri jawaban. Pertama, tanya apa yang saya ketahui tentang {x} dan seberapa yakin saya (0 sampai 10). Lalu ajukan satu pertanyaan per giliran dari file yang saya unggah. Setelah saya menjawab, koreksi dengan menyebut nama file dan halaman, lalu tanyakan kesimpulan saya."},
+jawab:{e:"Yang akan terjadi: AI menjawab langsung dan singkat, lalu bertanya bagian mana yang perlu kamu periksa sendiri.",p:"Peran: asisten penjawab. Jawab langsung dan singkat berdasarkan file yang saya unggah, tentang {x}. Sebutkan nama file dan halaman untuk setiap klaim. Akhiri dengan satu pertanyaan: bagian mana yang perlu saya periksa sendiri?"}},mode="baca";
+var LB=[["Paham materi kuliah","Tanya jawab dari file bacaanmu"],["Cari paper","Temukan jurnal yang relevan"],["Lihat peta paper","Telusuri jejaring sitasi"],["Rapikan referensi","Simpan dan sitasi otomatis"],["Olah data","Statistik, survei, eksperimen"],["Tulis dan rapikan","Bahasa, APA, parafrase"],["Etika dan kejujuran","Aturan, izin, pelaporan AI"],["Presentasi dan mind map","Slide dan peta konsep"]];
+var $=function(i){return document.getElementById(i)},dlg=$("dlg"),stack=[],favs=[],af="*",q="",tt;
+try{favs=JSON.parse(localStorage.getItem("belajar-ai:favorites")||"[]")}catch(x){}
+function sv(){try{localStorage.setItem("belajar-ai:favorites",JSON.stringify(favs))}catch(x){}}
+function e(t,c,x,k){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;if(k)k.forEach(function(y){n.appendChild(y)});return n}
+function toast(m){var t=dlg.open?$("dtoast"):$("toast");t.textContent=m;t.className="s";clearTimeout(tt);tt=setTimeout(function(){t.className=""},1600)}
+function fb(t,ok){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(x){toast("Salin manual saja")}a.remove()}
+function copy(t,cb){var ok=function(){if(cb)cb();else toast("✓ Tersalin")};try{navigator.clipboard.writeText(t).then(ok,function(){fb(t,ok)})}catch(x){fb(t,ok)}}
+function btn(txt,cls,fn){var b=e("button",cls,txt);b.onclick=fn;return b}
+function lnk(txt,href,cls){var a=e("a",cls||"btn",txt);a.href=href;a.rel="noopener";a.target="_blank";return a}
+function pus(){if(LINKS.pustaka){window.open(LINKS.pustaka,"_blank","noopener")}else toast("Tautan Pustaka belum diisi tim")}
+function setT(t){$("dt").textContent=t}
+var trig=null,uid=0,pushed=0;function go(n,a){var c=stack[stack.length-1];if(c)c.sc=$("dc").scrollTop;stack.push([n,a]);if(!dlg.open){trig=document.activeElement;dlg.showModal()}try{history.pushState({d:1},"");pushed++}catch(x){}draw()}
+function draw(){var s=stack[stack.length-1],d=$("dc");d.innerHTML="";$("bk").style.visibility=stack.length>1?"visible":"hidden";V[s[0]](d,s[1]);d.scrollTop=s.sc||0;if(!s.f){s.f=1;var t=$("dt");t.tabIndex=-1;t.focus({preventScroll:true})}}
+$("bk").onclick=function(){if(pushed>0)history.back();else{stack.pop();draw()}};$("cl").onclick=function(){dlg.close()};dlg.addEventListener("close",function(){stack=[];try{qbr()}catch(x){}if(trig&&trig.focus)trig.focus();var n=pushed;pushed=0;if(n>0){try{history.go(-n)}catch(x){}}});dlg.addEventListener("click",function(x){if(x.target===dlg)dlg.close()});window.addEventListener("popstate",function(){if(!dlg.open)return;if(pushed>0)pushed--;if(stack.length>1){stack.pop();draw()}else dlg.close()});
+function ac(t){return/ratis/i.test(t[2])?"g":/erbayar/i.test(t[2])?"b":"c"}
+function ok(t,b){return(af==="*"||ac(t)===af)&&(!q||(t[0]+" "+t[1]+" "+b.t).toLowerCase().indexOf(q)>-1)}
+function row(t,b,lab){var w=e("div","row"),h=e("button","rh"),d=e("div","rb"),id="rb"+(++uid);d.id=id;h.setAttribute("aria-controls",id);h.setAttribute("aria-expanded","false");h.appendChild(e("span","rn",t[0]));h.appendChild(e("span","badge",t[2]));h.appendChild(e("span","chev","›"));h.onclick=function(){h.setAttribute("aria-expanded",w.classList.toggle("open"))};
+if(lab)d.appendChild(e("p","mut","Tahap: "+lab));d.appendChild(e("p","",null,[e("b","","Cocok untuk: "),document.createTextNode(t[1])]));d.appendChild(e("p","why","Kelebihan: "+(Y[t[0]]||BR[MAP.indexOf(b)])));d.appendChild(e("p","mut","Perlu diingat: "+b.w));var a=e("div","acts");a.style.marginTop="8px";if(t[3])a.appendChild(lnk("Buka situs",t[3],"btn o"));
+var f=e("button","chip"),u=function(){var on=favs.indexOf(t[0])>-1;f.textContent=on?"Tersimpan":"Simpan alat";f.setAttribute("aria-pressed",on?"true":"false")};u();f.onclick=function(){var i=favs.indexOf(t[0]);if(i>-1){favs.splice(i,1);toast("Dihapus")}else{favs.push(t[0]);toast("✓ Tersimpan")}sv();u()};a.appendChild(f);d.appendChild(a);w.appendChild(h);w.appendChild(d);return w}
+function accChips(fn,gl){var c=e("div","chips"),L=[["*","Semua"],["g","Gratis atau ada paket gratis"],["b","Berbayar"],["c","Cek akses"]],bt=[];L.forEach(function(s){var b=e("button","chip");b.onclick=function(){af=s[0];c.refresh();fn()};bt.push(b);c.appendChild(b)});
+c.refresh=function(){var l=gl();L.forEach(function(s,i){var n=s[0]==="*"?l.length:l.filter(function(t){return ac(t)===s[0]}).length;bt[i].textContent=s[1]+" ("+n+")";bt[i].setAttribute("aria-pressed",af===s[0]?"true":"false")})};c.refresh();return c}
+function accNote(){return e("div","hint",null,[e("b","","Tentang akses alat"),e("p","","Gratis atau ada paket gratis: bisa dipakai tanpa membayar, tetapi sebagian fitur mungkin terbatas."),e("p","","Berbayar: pemakaian utamanya butuh langganan atau pembayaran."),e("p","","Cek akses: ketersediaan bisa berbeda menurut akun, institusi, atau paket. Cek situs resminya dulu."),e("small","mut","Status akses terakhir diperiksa 14 November 2026 dan dapat berubah. Cek situs resmi sebelum mengandalkan informasi ini.")])}
+var V={};
+V.ai=function(d){setT("Cari alat untuk tugasmu");d.appendChild(e("p","hint","Alat populer belum tentu cocok untuk tugasmu. Mulai dari apa yang sedang kamu kerjakan."));var i=e("input");i.type="text";i.placeholder="Ketik kebutuhanmu: paper, SPSS, sitasi...";i.setAttribute("aria-label","Cari alat");i.value=q;i.autocomplete="off";
+var gl=function(){var r=[];MAP.forEach(function(b){b.k.forEach(function(t){if(!q||(t[0]+" "+t[1]+" "+b.t).toLowerCase().indexOf(q)>-1)r.push(t)})});return r},chips=accChips(function(){paint()},gl),res=e("div"),paint=function(){res.innerHTML="";chips.refresh();if(q){var n=0;MAP.forEach(function(b){b.k.forEach(function(t){if(ok(t,b)){n++;res.appendChild(row(t,b,b.t))}})});res.insertBefore(e("p","mut",n?n+" alat ditemukan":"Belum menemukan alat yang cocok. Coba kata kunci seperti “paper”, “data”, atau “sitasi”."),res.firstChild);return}
+res.appendChild(e("h3","","Apa yang sedang kamu kerjakan?"));var g=e("div","cats");MAP.forEach(function(b,j){var cn=b.k.filter(function(t){return ok(t,b)}).length,c=e("button","cat","",[e("i","",String(j+1)),e("span","",null,[e("b","",LB[j][0]),e("small","",LB[j][1]+" · "+(af==="*"?cn+" alat":cn+" dari "+b.k.length+" alat"))])]);c.style.setProperty("--c","hsl("+b.h+" 65% 38%)");c.onclick=function(){q="";go("cat",j)};g.appendChild(c)});res.appendChild(g)};
+i.oninput=function(){q=i.value.trim().toLowerCase();paint()};d.appendChild(i);d.appendChild(chips);d.appendChild(accNote());var fv=e("div","acts");fv.appendChild(btn("Alat tersimpan ("+favs.length+")","chip",function(){go("fav")}));fv.appendChild(btn("Bingung AI boleh dipakai atau tidak? Cek aturan","chip",function(){go("rules")}));fv.style.marginTop="0";d.appendChild(fv);d.appendChild(res);paint()};
+V.cat=function(d,j){var b=MAP[j];setT(LB[j][0]);d.appendChild(e("p","hint","Perlu diingat: "+b.w));q="";var l=e("div"),cn=e("p","mut"),chips=accChips(function(){paint()},function(){return b.k}),paint=function(){l.innerHTML="";chips.refresh();var n=0;b.k.forEach(function(t){if(ok(t,b)){n++;l.appendChild(row(t,b))}});cn.textContent=af==="*"?b.k.length+" alat":n+" dari "+b.k.length+" alat";if(!n)l.appendChild(e("p","mut","Belum ada alat yang sesuai dengan filter ini. Coba ubah filter atau lihat semua alat."))};d.appendChild(chips);d.appendChild(accNote());d.appendChild(cn);d.appendChild(l);paint()};
+V.fav=function(d){setT("Alat yang kamu simpan");if(!favs.length){d.appendChild(e("p","mut","Belum ada. Simpan alat yang ingin kamu coba, supaya ada di sini lagi saat kamu kembali."));return}
+favs.slice().forEach(function(n){var t=null;MAP.forEach(function(b){b.k.forEach(function(x){if(x[0]===n)t=x})});var a=e("div","acts");a.style.marginTop="8px";if(t&&t[3])a.appendChild(lnk("Buka",t[3],"btn o"));a.appendChild(btn("Hapus","b o dg",function(){favs.splice(favs.indexOf(n),1);sv();draw()}));d.appendChild(e("div","leg1",null,[e("b","",n),a]))});
+var a=e("div","acts");a.appendChild(btn("Salin daftar","b o",function(){copy("Alat yang ingin kucoba:\n"+favs.join("\n"))}));d.appendChild(a)};
+var LK="belajar-ai:learn",ls;function D0(){return{s:0,k:"",pre:5,post:5,m:"baca",t:"",c:[0,0,0],r:"",ch:"",tp:false}}try{ls=Object.assign(D0(),JSON.parse(localStorage.getItem(LK)||"{}"))}catch(x){ls=D0()}
+function sl(){try{localStorage.setItem(LK,JSON.stringify(ls))}catch(x){}}
+function nav(d,back,nx,fn){var a=e("div","acts");if(back)a.appendChild(btn("Kembali","b o",function(){ls.s--;sl();draw()}));var nbt=btn(nx,"b",fn);a.appendChild(nbt);d.appendChild(a);return nbt}
+V.learn=function(d){var s=ls.s;setT("Coba dulu, baru tanya AI");d.appendChild(e("p","mut",null,[e("span","badge","Saran"),document.createTextNode(" Langkah belajar yang kami sarankan, bukan aturan.")])).style.marginBottom="12px";var dt=e("div","dots");[0,1,2].forEach(function(i){dt.appendChild(e("span","dot"+(i<=s?" on":"")))});d.appendChild(dt);var dl=e("div","dl");["1 Coba jawab","2 Gunakan AI","3 Periksa"].forEach(function(x){dl.appendChild(e("span","",x))});d.appendChild(dl);
+if(s===0){d.appendChild(e("h3","","Coba jawab dulu"));d.appendChild(e("label","","Apa yang sudah kamu tahu tentang topik ini? (opsional)"));var kn=e("input");kn.type="text";kn.value=ls.k;kn.placeholder="Tulis dengan kata-katamu sendiri";kn.oninput=function(){ls.k=kn.value;sl()};d.appendChild(kn);d.appendChild(e("p","mut","Seberapa yakin kamu bisa menjelaskan ini tanpa membuka catatan?")).style.marginTop="12px";var bg=e("div","big",ls.pre+"/10"),r=e("input");r.type="range";r.min=0;r.max=10;r.value=ls.pre;r.setAttribute("aria-label","Keyakinan sebelum AI");r.oninput=function(){ls.pre=+r.value;ls.tp=true;bg.textContent=ls.pre+"/10";if(hl)hl.textContent="";if(nb)nb.disabled=false;sl()};d.appendChild(bg);d.appendChild(r);d.appendChild(e("div","sl",null,[e("span","","0 belum yakin"),e("span","","10 bisa menjelaskan")]));var hl=e("p","mut",ls.tp?"":"Geser angkanya dulu untuk melanjutkan.");d.appendChild(hl);d.appendChild(e("p","hint","Tidak perlu benar. Yang penting mulai dari pemahamanmu sendiri."));d.appendChild(e("p","mut","Kenapa mulai dari sini? Coba keluarkan jawabanmu dulu. Dengan begitu kamu punya sesuatu untuk dibandingkan ketika AI menjawab."));var nb=nav(d,0,"Lanjut",function(){ls.s=1;sl();draw()});nb.disabled=!ls.tp}
+else if(s===1){d.appendChild(e("h3","","Gunakan AI untuk membantu"));d.appendChild(e("p","mut","Pilih cara AI membantumu: memahami, menguji, atau menjawab."));var sg=e("div","seg"),ef=e("p","hint"),pe=e("pre"),ti=e("input");ti.type="text";ti.placeholder="mis. validitas konstruk, Bab 3";ti.value=ls.t;ti.setAttribute("aria-label","Topik");
+var rp=function(){pe.textContent=P[ls.m].p.replace("{x}",ls.t.trim()||"[topik]");ef.textContent=P[ls.m].e;sg.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.m===ls.m?"true":"false")})};
+[["baca","Jelaskan"],["uji","Uji saya"],["jawab","Jawab"]].forEach(function(m){var b=e("button","",m[1]);b.dataset.m=m[0];b.onclick=function(){ls.m=m[0];sl();rp()};sg.appendChild(b)});ti.oninput=function(){ls.t=ti.value;sl();rp()};
+d.appendChild(sg);d.appendChild(ef);d.appendChild(e("label","","Topik atau bagian (opsional)"));d.appendChild(ti);d.appendChild(pe);rp();var a=e("div","acts");a.style.marginTop="0";a.appendChild(btn("Salin kartu","b",function(){copy(pe.textContent)}));if(LINKS.pustaka)a.appendChild(btn("Buka Pustaka Belajar","b o",function(){window.open(LINKS.pustaka,"_blank","noopener")}));d.appendChild(a);d.appendChild(e("p","mut",LINKS.pustaka?"Unggah satu file materi ke AI-mu dulu, lalu tempel kartunya.":"Unggah satu file materi dari dosenmu ke AI, lalu tempel kartunya. Pustaka Belajar segera hadir."));nav(d,1,"Lanjut: periksa jawaban",function(){ls.s=2;sl();draw()})}
+else{d.appendChild(e("h3","","Periksa sebelum percaya"));d.appendChild(e("p","mut","Buka sumber aslinya dan cek tiga hal untuk tiap klaim penting:"));var ht=e("p","hint"),cal=function(){var n=ls.c[0]+ls.c[1]+ls.c[2],a=ls.pre,b=ls.post,m;if(n===0)m="Mulai dari memeriksa satu klaim ke sumber asli.";else if(n<3&&b-a>=3)m="Keyakinanmu naik "+(b-a)+" poin, tapi baru "+n+" dari 3 klaim diperiksa. Periksa dulu sebelum yakin.";else if(n<3)m="Sudah "+n+" dari 3 klaim diperiksa. Lanjutkan.";else if(b<a)m="Keyakinanmu turun setelah memeriksa. Itu tanda kamu menemukan celah, dan itu hal baik: kamu mengutamakan bukti.";else m="Tiga klaim sudah diperiksa. Keyakinanmu dari "+a+" ke "+b+", dengan bukti di tanganmu.";ht.textContent=m};
+["Ada buktinya di sumber asli","Maknanya sesuai dengan sumber","Sumbernya bisa dipercaya"].forEach(function(x,i){var l=e("label","ck"),c=e("input");c.type="checkbox";c.checked=!!ls.c[i];c.onchange=function(){ls.c[i]=c.checked?1:0;sl();cal()};l.appendChild(c);l.appendChild(document.createTextNode(x));d.appendChild(l)});
+d.appendChild(e("p","mut",null,[e("span","badge","Refleksi")])).style.marginTop="14px";var pv=e("b","",ls.post+"/10"),l2=e("label","","Setelah mengecek, seberapa yakin kamu sekarang? ",[pv]),r=e("input");r.type="range";r.min=0;r.max=10;r.value=ls.post;r.oninput=function(){ls.post=+r.value;pv.textContent=ls.post+"/10";sl();cal()};l2.htmlFor="rp";r.id="rp";d.appendChild(l2);d.appendChild(r);var l4=e("label","","Apa yang berubah setelah kamu mengecek?"),r4=e("input");r4.type="text";r4.id="rch";l4.htmlFor="rch";r4.value=ls.ch||"";r4.oninput=function(){ls.ch=r4.value;sl()};d.appendChild(l4);d.appendChild(r4);var l3=e("label","","Apa yang masih membuatmu ragu?"),ra=e("input");ra.type="text";ra.id="rg";l3.htmlFor="rg";ra.placeholder="mis. angka di halaman 14 tidak cocok";ra.value=ls.r;ra.oninput=function(){ls.r=ra.value;sl()};d.appendChild(l3);d.appendChild(ra);d.appendChild(e("h3","","Cek perubahan keyakinanmu")).style.margin="14px 0 0";d.appendChild(ht);cal();
+var a=e("div","acts");a.appendChild(btn("Kembali","b o",function(){ls.s=1;sl();draw()}));a.appendChild(btn("Salin refleksiku","b",function(){copy("Refleksi belajar\nYang sudah kutahu: "+(ls.k.trim()||"-")+"\nSebelum AI: yakin "+ls.pre+"/10\nKlaim diperiksa: "+(ls.c[0]+ls.c[1]+ls.c[2])+"/3\nSetelah mengecek: yakin "+ls.post+"/10\nYang berubah setelah mengecek: "+((ls.ch||"").trim()||"-")+"\nYang masih kuragukan: "+(ls.r.trim()||"-"))}));a.appendChild(btn("Cek bersama teman","b o",function(){go("friends")}));var rw=e("span"),rb=btn("Mulai dari awal","b o dg",function(){rw.innerHTML="";rw.appendChild(e("span","mut","Mulai dari awal? Progres belajar saat ini akan dihapus. "));rw.appendChild(btn("Mulai dari awal","b dgf",function(){ls=D0();sl();draw()}));rw.appendChild(btn("Batal","b o",function(){draw()}))});rw.appendChild(rb);a.appendChild(rw);d.appendChild(a);d.appendChild(e("p","mut","AI membantu prosesmu. Kamu tetap yang memutuskan.")).style.marginTop="12px"}};
+V.friends=function(d){setT("Cek bersama teman");d.appendChild(e("p","mut","Punya teman yang sedang belajar hal yang sama? Coba periksa jawaban AI bersama."));
+var inv="Eh, mau coba cek jawaban AI bareng? Kita pilih satu jawaban, ambil 3 klaim, lalu cari buktinya di sumber asli.";
+d.appendChild(e("div","leg1",null,[e("h3","","Caranya"),e("p","","1. Ambil satu jawaban AI."),e("p","","2. Pilih tiga klaim."),e("p","","3. Cari buktinya di sumber asli."),e("p","","4. Bandingkan hasilnya. Tiap orang tetap mengerjakan tugasnya sendiri."),e("p","","Coba ajak temanmu sendiri untuk melakukan pengecekan ini."),e("small","mut","Website ini tidak menyediakan kelompok belajar."),btn("Ajak temanmu (salin pesan)","b o sm",function(){copy(inv)})]));
+d.appendChild(e("div","leg1",null,[e("span","badge","Kegiatan kampus"),e("h3","","Sesi Teman Belajar"),e("p","","Diselenggarakan oleh BEM KM Psikologi Universitas Airlangga menjelang UTS dan UAS. Terbuka untuk semua, tidak wajib."),e("p","mut","Tidak bisa hadir? Cek pengumuman untuk bahan dan rekaman."),lnk("Lihat pengumuman terbaru",LINKS.bem)]))};
+V.rm=function(d){setT("Tugasku belum jelas");d.appendChild(e("p","","1. Cek instruksi tugas atau RPS."));d.appendChild(e("p","","2. Kalau belum jelas, tanyakan kepada dosen."));d.appendChild(e("p","","3. Jangan menganggap “tidak ada aturan” berarti otomatis boleh."));
+var i=e("input"),pe=e("pre");i.type="text";i.placeholder="Nama tugas, mis. Tugas 4 Analisis Kasus";i.setAttribute("aria-label","Nama tugas");var up=function(){pe.textContent="Selamat siang, Bu/Pak. Untuk tugas "+(i.value.trim()||"[nama tugas]")+", apakah boleh memakai AI? Bagian mana yang boleh dibantu AI, bahan apa yang boleh saya unggah, dan apakah perlu mencatat penggunaan AI? Terima kasih."};i.oninput=up;up();d.appendChild(e("h3","","Butuh bantuan menyusun pertanyaan?")).style.marginTop="14px";d.appendChild(i);d.appendChild(pe);d.appendChild(btn("Salin pertanyaan","b",function(){copy(pe.textContent)}))};
+V.rk=function(d){setT("Untuk komting");var i=e("input"),pe=e("pre"),fm="INFO AI UNTUK TUGAS\nTugas: [nama tugas], tenggat [hari, tanggal, jam]\nBatas dari dosen: [A bebas / B terbatas di bagian: ... / C tanpa AI / belum ditentukan, tanya dosen]\nBahan yang boleh diunggah ke AI: [boleh: ... / jangan: ...]\nCatatan AI: [diminta / tidak diminta]\nPeta AI dan Pustaka: [tautan website ini]\nReaksi jempol kalau sudah baca. Belum jelas? Tanya aku.";i.type="text";i.placeholder="Nama tugas, mis. Tugas 4 Analisis Kasus";i.setAttribute("aria-label","Nama tugas");
+var up=function(){pe.textContent="Selamat siang, Bu/Pak. Saya komting kelas ini. Untuk tugas "+(i.value.trim()||"[nama tugas]")+", apakah boleh memakai AI? Bagian mana yang boleh dibantu AI, bahan apa yang boleh diunggah, dan apakah perlu Catatan AI? Terima kasih."};i.oninput=up;up();
+d.appendChild(e("h3","","1. Tanya dosen"));d.appendChild(i);d.appendChild(pe);d.appendChild(btn("Salin pesan ke dosen","b",function(){copy(pe.textContent)}));d.appendChild(e("h3","","2. Bagikan jawabannya ke grup")).style.marginTop="18px";var f=e("pre","",fm);d.appendChild(f);d.appendChild(btn("Salin format info","b",function(){copy(fm)}))};
+V.catatan=function(d){setT("Catat penggunaan AI");d.appendChild(e("p","mut","Jika tugasmu meminta deklarasi AI, isi bagian ini dan salin catatannya ke dokumenmu. Semua isian opsional. Transparansi penggunaan AI membantu menjaga integritas akademik (Buku UP3, 2025)."));var F=[["Alat dan versi","mis. Gemini"],["AI membantu saya untuk","mis. memahami artikel"],["Saya tulis sendiri","mis. seluruh argumen"],["Cara saya memeriksa","mis. mencocokkan kutipan ke file"]],ins=[],pe=e("pre"),np=function(){pe.textContent="Catatan Penggunaan AI\n"+F.map(function(f,i){return f[0]+": "+(ins[i].value.trim()||"["+f[1]+"]")}).join("\n")};
+F.forEach(function(f,i){var l=e("label","",f[0]),n=e("input");n.type="text";n.id="cn"+i;l.htmlFor=n.id;n.placeholder=f[1];n.oninput=np;ins.push(n);d.appendChild(l);d.appendChild(n)});d.appendChild(pe);np();d.appendChild(btn("Salin catatan","b",function(){copy(pe.textContent)}));d.appendChild(e("p","mut","Log pribadi (opsional): catatan untuk dirimu sendiri. Tidak dikumpulkan dan tidak dilihat dosen.")).style.marginTop="12px"};
+V.about=function(d){setT("Tentang website ini");d.appendChild(e("p","","Website ini dibuat untuk membantu mahasiswa memakai AI sebagai alat belajar tanpa menyerahkan proses berpikir kepada AI."));d.appendChild(e("p","","Ringkasan buatan mahasiswa, bukan aturan resmi. Batas penggunaan AI ditetapkan dosen; bila ada perbedaan, ikuti dosen. Dibuat oleh "+TIM+" (mata kuliah Mental Model and Design Thinking) sebagai prototipe yang kami ujikan kepada mahasiswa."));d.appendChild(btn("Lihat proses desain","b o",function(){go("proses")}));
+d.appendChild(e("h3","","Pengelolaan")).style.marginTop="18px";d.appendChild(e("p","mut","Website ini dikembangkan oleh Kelompok 1 MMDT sebagai prototipe. Pustaka dan pembaruan konten selanjutnya dapat dilanjutkan oleh pengelola yang ditunjuk. Pengelola saat ini: Kelompok 1 MMDT."));d.appendChild(e("h3","","Masukan")).style.marginTop="18px";d.appendChild(e("p","mut","Ada yang membingungkan atau menemukan kesalahan? Bantu kami memperbaiki website ini."));
+if(LINKS.email){d.appendChild(btn("Salin contact person","b",function(){copy(LINKS.email,function(){toast("✓ Contact person tersalin")})}))}else d.appendChild(e("p","mut","Kontak masukan akan dicantumkan oleh "+TIM+"."));
+d.appendChild(e("p","mut","Versi 1.6 · November 2026")).style.marginTop="12px"};
+V.proses=function(d){setT("Proses desain");d.appendChild(e("h3","","Tiga akar masalah"));["Sumber tepercaya yang tersebar dan sulit dicerna di tengah tekanan waktu.","Batas penggunaan AI yang ditentukan dosen satu per satu dan sering tidak jelas.","Tidak ada cara belajar dengan AI yang bisa dipilih sesuai gaya belajar tanpa kehilangan kendali."].forEach(function(x,i){d.appendChild(e("p","",(i+1)+". "+x))});
+d.appendChild(e("h3","","Prinsip desain")).style.marginTop="14px";var u=e("ul");["Discoverability: tiga tujuan utama terlihat di layar pertama dengan kata kerja yang jelas, ditambah kolom cari.","Understanding: tiap menu menjelaskan isinya dalam satu kalimat, dan tiap langkah menjelaskan alasannya.","Affordances: kartu, tombol, slider, dan isian tampak bisa dipakai, dengan ukuran sentuh minimal 44 px.","Signifiers: warna dan nomor tiap kebutuhan, label akses, bentuk ●▲■ selain warna, dan status terpilih pada tombol.","Mappings: urutan mengikuti urutan kerja (coba jawab, gunakan AI, periksa).","Feedback: notifikasi tersalin di dalam jendela, bilah langkah, kalibrasi keyakinan, dan alat tersimpan yang bertahan.","Conceptual models: AI menemani, kamu yang memegang kendali.","Prinsip lain: tiga pilihan utama (Hick), rincian dibuka bertahap (progressive disclosure), pemisahan label Aturan, Saran, dan Refleksi, serta tombol Kembali peramban yang berfungsi."].forEach(function(x){u.appendChild(e("li","",x))});d.appendChild(u);
+d.appendChild(e("h3","","Sumber isi")).style.marginTop="14px";d.appendChild(e("p","","Alat dirangkum dari Peta Hard Skill Periset Psikologi 2.0 (Ardi, 2025) dan buku digital AI sebagai Alat Bantu dalam Riset Akademik (2025), terbitan UP3 Fakultas Psikologi Unair, ditambah alat lain yang dipilih tim. Kabar AI dan aturan dirangkum dari Peraturan Rektor UNAIR 24/2026, Panduan Penggunaan GenAI pada Pembelajaran di Perguruan Tinggi (2024), Harvard University Privacy Principles Companion Guide dan PrivSec Risk Classifications, McKinsey Global Institute (Agents, robots, and us), dan NIST AI RMF Playbook. Status akses umum dicek 14 November 2026 dan bisa berubah."));
+d.appendChild(e("h3","","Keterbatasan")).style.marginTop="14px";d.appendChild(e("p","","Temuan berasal dari sampel kecil. Sebagian bahan awal berasal dari materi kelas dan tidak diasumsikan tersedia bagi semua mahasiswa, sehingga tidak dijadikan prasyarat memakai website. Ringkasan ini bukan pengganti teks resmi."))};
+var Y={"Gemini Notebook (NotebookLM)":"Menjawab dari file yang kamu unggah dan menautkan ke kutipannya, jadi lebih mudah dicek daripada chat umum.","ChatGPT":"Serba bisa untuk menjelaskan dan berlatih; Study Mode memandu bertahap. Cocok untuk berpikir bersama, bukan sebagai sumber fakta.","Claude":"Cocok untuk menjelaskan konsep dan membaca dokumen panjang; tetap periksa ke sumber.","Perplexity":"Menyertakan tautan sumber untuk ditelusuri. Tetap buka sumber aslinya.","Anki":"Melatih mengingat berulang dengan jeda, bukan sekadar membaca ulang.","Scopus AI":"Bekerja di atas basis data jurnal Scopus, bukan dari ingatan model.","Undermind":"Mencari mendalam dan memperkirakan seberapa lengkap pencarianmu.","Elicit":"Menyusun temuan antar paper dan mengekstrak data, memangkas waktu menyaring literatur.","Scite":"Menunjukkan apakah paper lain mendukung atau membantah klaim, bukan sekadar menghitung sitasi.","Consensus":"Menjawab pertanyaan penelitian dari temuan paper dengan rujukan.","Semantic Scholar":"Mesin pencari paper dengan ringkasan singkat per paper.","Google Scholar":"Cakupan luas dan menunjukkan siapa yang mengutip tiap paper.","Rayyan":"Dirancang untuk menyaring banyak artikel bersama tim pada tinjauan sistematis.","Research Rabbit":"Menemukan paper terkait lewat jejaring sitasi dan penulis, sehingga muncul yang tak terjaring kata kunci.","Connected Papers":"Menggambar peta kemiripan paper, cepat melihat paper akar dan turunannya.","Litmaps":"Memantau literatur baru yang terhubung ke peta bacaanmu.","VOSviewer":"Memetakan klaster topik dari data bibliometrik untuk melihat gambaran bidang.","Open Knowledge Maps":"Memberi gambaran topik dari kata kunci, cocok untuk orientasi awal.","Inciteful":"Menelusuri paper kunci dalam jaringan sitasi.","Bibliometrix":"Analisis bibliometrik yang bisa direplikasi di R.","Zotero":"Menyimpan PDF, catatan, dan sitasi di satu tempat sehingga daftar pustaka otomatis.","JASP":"Hasil analisis rapi dan mudah dibaca, cocok untuk belajar statistik, termasuk Bayesian.","jamovi":"Modul tambahan memperluas analisis tanpa menulis kode.","SPSS":"Standar yang banyak dipakai kampus untuk analisis dasar sampai menengah.","RStudio":"Analisis lanjut yang bisa direplikasi lewat kode.","PsychoPy":"Menyusun eksperimen dengan pengaturan stimulus yang terkontrol.","LimeSurvey":"Survei daring dengan kendali atas datamu.","Google Colab":"Menjalankan Python tanpa instalasi di komputer.","Asisten AI untuk sintaks":"Menjelaskan baris kode dan pesan galat; kamu yang menjalankan dan memeriksa hasilnya.","KBBI Daring":"Rujukan resmi kata baku bahasa Indonesia.","Overleaf":"Menulis LaTeX bersama tanpa instalasi.","Peraturan Rektor UNAIR 24/2026":"Dasar kebijakan: apa yang boleh, dibatasi, dan dilarang.","COPE":"Panduan etika publikasi, termasuk kepenulisan dan AI.","DOAJ":"Membantu memeriksa jurnal terdaftar dan menghindari jurnal predator.","OSF":"Pra-registrasi mencatat rencana analisis sebelum data diambil."};
+var BR=["Chat umum menjawab dari ingatan model dan bisa keliru. Alat yang bekerja dari filemu menunjukkan kutipan yang bisa kamu periksa.","Chat umum bisa mengarang referensi. Alat pencarian literatur mengambil dari basis data paper sungguhan, jadi daftarnya bisa dibuka dan diperiksa.","Chat umum tidak melihat jaringan sitasi. Alat peta menunjukkan siapa mengutip siapa, sehingga kamu menemukan paper yang tak muncul lewat kata kunci.","AI chat tidak menyimpan perpustakaan referensimu. Pengelola referensi merapikan sitasi dan daftar pustaka secara otomatis dan konsisten.","Chat umum tidak menjalankan analisismu. Perangkat statistik menghitung dengan prosedur yang bisa direplikasi; AI membantu menjelaskan.","Alat bahasa khusus berfokus pada tata bahasa dan gaya akademik. AI umum bisa mengubah makna bila dibiarkan menulis ulang.","Ini bukan tempat AI: ini pedoman dan aturan yang menjadi pegangan, dan AI tidak bisa menggantikan keputusan etik.","Alat desain dan mind map mempercepat visual. Isi dan pemahaman tetap darimu."];
+var NEWS=[
+["Aturan","AI boleh dipakai, tapi tidak boleh menggantikan berpikirmu","Peraturan Rektor UNAIR membolehkan AI sebagai alat bantu: memahami materi, mencari ide dan sumber, menyusun kerangka, dan menyunting bahasa secara terbatas. Hasilnya tidak boleh menggantikan berpikir kritis, penguasaan konsep, dan tanggung jawab akademikmu.","Karya yang sepenuhnya dihasilkan AI tanpa kontribusi intelektualmu dilarang.","Perrek UNAIR 24/2026, Pasal 4 ayat 1, 2, dan 5"],
+["Aturan","Belum ada aturan di tugasmu? Tanya dosen dulu","Batas AI ditentukan dosen dan seharusnya tertulis di RPS, kontrak kuliah, atau pedoman tugas. Kalau tidak ada, peraturan mewajibkan kamu meminta persetujuan dosen sebelum memakai AI. Di ujian, AI dilarang kecuali dosen mengizinkan.","Diam bukan berarti boleh.","Perrek 24/2026, Pasal 5 ayat 2 sampai 4"],
+["Risiko","Peraturan mewajibkan kamu memeriksa jawaban AI","Setiap pengguna wajib memverifikasi luaran AI: akurasi, keabsahan referensi, kesesuaian konteks, potensi bias, kesesuaian etika akademik, dan risiko hukum atau data pribadi.","Buka sumbernya dan pastikan referensinya benar-benar ada. Referensi tidak valid bisa dihitung pelanggaran sedang, dan referensi fiktif pelanggaran berat.","Perrek 24/2026, Pasal 12, 26, dan 27"],
+["Aturan","Detektor AI bukan hakim","Hasil alat pendeteksi AI atau uji kemiripan tidak boleh menjadi satu-satunya bukti pelanggaran. Dosen boleh meminta klarifikasi lisan, refleksi tertulis, atau pemeriksaan proses, dan kamu berhak memberi klarifikasi.","Pemahamanmu dan jejak prosesmu lebih menentukan daripada skor mesin.","Perrek 24/2026, Pasal 5 ayat 6 dan 7, Pasal 12"],
+["Privasi","Data pribadi jangan ditempel ke AI publik","Dilarang memasukkan data pribadi, data kesehatan, keuangan, data akademik individual, data penelitian rahasia, atau data pihak ketiga ke sistem AI di luar kendali UNAIR tanpa dasar yang sah. Bila perlu, data harus dianonimkan atau diamankan.","Transkrip wawancara, data peserta, dan identitas teman tidak pantas ditempel begitu saja.","Perrek 24/2026, Pasal 13"],
+["Risiko","Semakin besar risikonya, semakin hati-hati penggunaannya","Minimal (asistif), terbatas (membantu bagian non-final), tinggi (terkait asesmen akademik, penelitian, publikasi, atau data pribadi), dan tidak dapat diterima (dilarang). Makin tinggi risikonya makin ketat pengawasannya, dan bila ragu dianggap lebih tinggi dulu.","Merapikan bahasa jauh lebih ringan risikonya daripada menganalisis data peserta.","Perrek 24/2026, Pasal 10 dan 11"],
+["Aturan","Apa yang dihitung pelanggaran?","Tidak mendeklarasikan padahal wajib, mengabaikan verifikasi, dan sitasi tidak valid termasuk pelanggaran sedang. Pelanggaran berat meliputi fabrikasi, referensi fiktif, kecurangan ujian, dan memasukkan data rahasia ke AI publik. Penilaian mempertimbangkan niat, kontribusi AI, ada tidaknya deklarasi, dan hasil klarifikasi.","Terbuka soal bantuan AI dan jujur lebih menolongmu.","Perrek 24/2026, Pasal 26 sampai 28"],
+["Risiko","Tiga masalah etis AI generatif menurut Panduan Dikti","Panduan 2024 menyebut kesenjangan akses, bias data yang menghasilkan keluaran diskriminatif, dan potensi plagiarisme karena AI mudah menghasilkan teks yang mirip karya asli.","Inilah alasan kampus membuat batasan, bukan sekadar melarang atau membebaskan.","Panduan Penggunaan GenAI pada Pembelajaran di Perguruan Tinggi (2024)"],
+["Tips","Kurangi halusinasi: beri AI sumbernya","Untuk memahami materi, sebaiknya masukan ke AI bukan hanya pertanyaan, tetapi juga sumber informasinya. Tanpa sumber, keluaran harus dicek kebenarannya.","Itulah alasan Kartu Mode di website ini selalu meminta nama file dan halaman.","Panduan Penggunaan GenAI (2024), bagian memahami konten"],
+["Privasi","Data yang tampak anonim bisa dikenali lagi","Data set tanpa nama pun bisa membuat orang teridentifikasi kembali bila digabung dengan data lain. Harvard menyarankan menimbang kepekaan data dan potensi bahayanya.","Menghapus nama saja belum tentu cukup sebelum data dimasukkan ke alat AI.","Harvard University Privacy Principles Companion Guide (Juli 2026)"],
+["Privasi","Tidak semua data sama sensitif","Klasifikasi Harvard membedakan empat level, dari informasi publik sampai data yang sangat sensitif. Sebagian besar data pribadi berada di level 3, yaitu hanya untuk orang yang perlu tahu.","Data pribadi perlu diperlakukan lebih hati-hati daripada bahan kuliah umum.","Reference Guide: PrivSec Risk Classifications (2025)"],
+["Dunia kerja","Kemampuan memakai AI makin dicari","Analisis McKinsey menemukan permintaan akan kemampuan memakai dan mengelola AI naik tujuh kali lipat dalam dua tahun pada lowongan kerja di AS, lebih cepat dari keterampilan lain. Secara teori teknologi saat ini bisa mengotomatisasi aktivitas setara sekitar 57 persen jam kerja AS, tetapi itu potensi teknis, bukan ramalan PHK.","Literasi AI berarti mengelola AI dengan kritis, bukan hanya bisa menekan tombolnya.","McKinsey Global Institute, Agents, robots, and us (2025)"],
+["Kerangka","Cara berpikir ala NIST: Govern, Map, Measure, Manage","Playbook AI RMF dari NIST menata pengelolaan risiko AI dalam empat fungsi: menetapkan tata kelola, memetakan konteks, mengukur risiko, dan mengelolanya.","Untuk tugasmu, tanyakan: AI ini untuk apa, risikonya apa, bagaimana kuperiksa, dan bagaimana kukendalikan.","NIST AI RMF Playbook"],
+["Tips","Jawaban rapi belum tentu benar","Buku Alat Bantu AI mengingatkan adanya bias kelancaran pemrosesan: keluaran yang lancar dan yakin terasa benar. Menyatakan bantuan AI secara terbuka juga membantu menjaga integritas akademik.","Karena itu website ini meminta kamu menebak dulu dan memeriksa sebelum yakin.","Buku digital AI sebagai Alat Bantu dalam Riset Akademik (UP3, 2025)"]];
+var QZ=[["Tugasmu belum punya aturan AI dari dosen. Apa yang wajib kamu lakukan?",["Memakai AI karena tidak dilarang","Meminta persetujuan dosen dulu","Bertanya ke teman saja","Tidak perlu berbuat apa-apa"],1,"Tanpa ketentuan tertulis, mahasiswa wajib memperoleh persetujuan dosen (Perrek 24/2026, Pasal 5 ayat 3)."],
+["Detektor AI menunjukkan tulisanmu 80 persen AI. Cukupkah itu untuk menyatakan pelanggaran?",["Cukup, skornya tinggi","Tidak, hasil detektor tidak boleh jadi satu-satunya dasar"],1,"Hasil detektor tidak dapat menjadi satu-satunya alat bukti (Pasal 5 ayat 7 dan Pasal 12). Kamu juga berhak memberi klarifikasi."],
+["Mana yang dilarang tanpa dasar sah atau pengamanan?",["Merangkum artikel jurnal dengan AI","Merapikan bahasa laporan","Menempel data kesehatan pihak lain ke AI publik","Membuat kerangka presentasi"],2,"Memasukkan data pribadi, kesehatan, atau rahasia ke AI di luar kendali UNAIR dilarang tanpa dasar sah (Pasal 13 ayat 2)."],
+["Sebelum memakai jawaban AI untuk tugas, apa yang wajib kamu lakukan?",["Menyalin langsung","Memverifikasi akurasi dan keabsahan referensinya","Meminta AI mengecek dirinya sendiri","Menunggu teman memeriksa"],1,"Setiap pengguna wajib memverifikasi luaran AI, termasuk akurasi dan keabsahan referensi (Pasal 12)."],
+["Cara mengurangi halusinasi saat memahami materi?",["Menyertakan file sumber bersama pertanyaan","Bertanya sesingkat mungkin","Mengulang pertanyaan yang sama","Memakai AI yang berbeda saja"],0,"Panduan GenAI 2024: sertakan sumber informasi pada masukan, dan tanpa sumber, keluaran harus dicek."]];
+function rr(){try{return JSON.parse(localStorage.getItem("belajar-ai:news-read")||"[]")}catch(x){return[]}}
+function bs(){try{return+localStorage.getItem("belajar-ai:quiz-best")||0}catch(x){return 0}}
+function stat(){var s=$("st");if(s)s.textContent="Kabar dibaca: "+rr().length+" dari "+NEWS.length}
+function mark(i){var r=rr();if(r.indexOf(i)<0){r.push(i);try{localStorage.setItem("belajar-ai:news-read",JSON.stringify(r))}catch(x){}}stat()}
+function acc(title,tag,ps,fn){var w=e("div","row"),h=e("button","rh"),d=e("div","rb"),id="rb"+(++uid);d.id=id;h.setAttribute("aria-controls",id);h.setAttribute("aria-expanded","false");if(tag)h.appendChild(e("span","badge",tag));h.appendChild(e("span","rn",title));h.appendChild(e("span","chev","›"));h.onclick=function(){var o=w.classList.toggle("open");h.setAttribute("aria-expanded",o);if(o&&fn)fn()};ps.forEach(function(p){d.appendChild(p)});w.appendChild(h);w.appendChild(d);return w}
+V.news=function(d,k){setT("Kabar AI");var up=function(){};
+NEWS.forEach(function(n,i){var w=acc(n[1],n[0],[e("p","",n[2]),e("p","hint","Kenapa penting buatmu: "+n[3]),e("p","mut","Sumber: "+n[4])],function(){mark(i);up()});if(k===i){w.classList.add("open");mark(i);up()}d.appendChild(w)});
+var a=e("div","acts");a.appendChild(btn("Coba cek pemahamanmu","b",function(){go("quiz")}));d.appendChild(a)};
+var qs={i:0,s:0,a:-1,w:[]};
+function qbr(){var x=$("qb");if(x){var b=bs();x.textContent=b?"Pencapaian terbaikmu: "+Math.round(b/QZ.length*100)+"%":""}}
+V.quiz=function(d){setT("Coba cek pemahamanmu");if(qs.i>=QZ.length){var sc=qs.s,pc=Math.round(sc/QZ.length*100);try{if(sc>bs())localStorage.setItem("belajar-ai:quiz-best",String(sc))}catch(x){}qbr();d.appendChild(e("h3","","Pencapaianmu"));d.appendChild(e("div","big",pc+"%"));var br=e("div","bar"),bi=e("i");bi.style.width=pc+"%";br.appendChild(bi);br.setAttribute("aria-hidden","true");d.appendChild(br);d.appendChild(e("p","",sc+" dari "+QZ.length+" jawaban tepat."));d.appendChild(e("p","hint",sc===QZ.length?"Semua jawabanmu tepat. Mau lihat kembali alasan di baliknya?":"Belum semua tepat. Lihat penjelasan pada soal yang masih keliru"+(qs.w.length?" (soal "+qs.w.join(", ")+")":"")+", lalu coba lagi."));var a=e("div","acts");a.appendChild(btn("Ulangi kuis","b",function(){qs={i:0,s:0,a:-1,w:[]};draw()}));a.appendChild(btn("Baca kabar AI","b o",function(){go("news")}));d.appendChild(a);return}
+var q=QZ[qs.i];d.appendChild(e("p","mut","Soal "+(qs.i+1)+" dari "+QZ.length));d.appendChild(e("h3","",q[0]));var o=e("div","opts");q[1].forEach(function(t,j){var b=e("button","",t);if(qs.a>=0){b.disabled=true;if(j===q[2])b.className="ok";else if(j===qs.a)b.className="no"}b.onclick=function(){qs.a=j;if(j===q[2])qs.s++;else qs.w.push(qs.i+1);draw()};o.appendChild(b)});d.appendChild(o);
+if(qs.a>=0){var rt=qs.a===q[2];d.appendChild(e("p","hint "+(rt?"okh":"noh"),(rt?"✓ Tepat. ":"✕ Belum tepat. Jawaban yang lebih tepat: "+q[1][q[2]]+". ")+q[3]));d.appendChild(btn(qs.i===QZ.length-1?"Lihat hasil":"Soal berikutnya","b",function(){qs.i++;qs.a=-1;draw()}))}};
+var QA=[["Etisnya masih diperdebatkan, kenapa tetap boleh?","UNAIR memilih pendekatan berbasis risiko: pemakaian asistif berisiko rendah dibolehkan, yang menyentuh asesmen, penelitian, atau data pribadi diawasi lebih ketat, dan yang melanggar integritas atau hukum dilarang. Panduan Dikti 2024 juga mengakui risiko etisnya (kesenjangan akses, bias, plagiarisme), jadi jawabannya batasan, bukan larangan total.","Perrek 24/2026, Pasal 3 dan 10; Panduan GenAI 2024"],["Kenapa AI tidak boleh menggantikan berpikirku?","Tujuannya menjaga integritas akademik, orisinalitas karya, dan kontribusi intelektual manusia. Karena itu AI tidak boleh menggantikan berpikir kritis, penguasaan konsep, dan tanggung jawab akademikmu.","Perrek 24/2026, Pasal 3 dan 4 ayat 2"],["Kenapa aku perlu memeriksa jawaban AI?","Jawaban AI bisa keliru atau bias. Buka sumbernya, pastikan referensinya benar-benar ada, dan cek apakah konteksnya cocok sebelum dipakai.","Perrek 24/2026, Pasal 12"],["Kenapa detektor AI tidak dipakai sebagai bukti tunggal?","Hasil alat deteksi tidak boleh menjadi satu-satunya dasar menetapkan pelanggaran. Dosen dapat memverifikasi lewat klarifikasi lisan atau pemeriksaan proses, dan kamu berhak memberi klarifikasi.","Perrek 24/2026, Pasal 5 ayat 6 dan 7, Pasal 12"],["Kenapa data pribadi tidak boleh dimasukkan ke AI?","Tujuannya melindungi data pribadi, data rahasia, dan keamanan informasi. Data semacam itu tidak boleh dimasukkan ke AI di luar kendali UNAIR tanpa dasar sah atau pengamanan memadai.","Perrek 24/2026, Pasal 3 dan 13"],["Kenapa ada tingkat risiko?","Supaya kehati-hatian sepadan dengan risikonya: makin tinggi risiko, makin ketat pengawasannya. Bila ragu, pemakaian dianggap berisiko lebih tinggi sementara.","Perrek 24/2026, Pasal 10 dan 11"]];
+V.rules=function(d){setT("Cek aturan AI");d.appendChild(e("p","mut",null,[e("span","badge","Aturan resmi"),document.createTextNode(" Dirangkum dari Peraturan Rektor UNAIR 24/2026. Terakhir diperiksa November 2026.")])).style.marginBottom="10px";d.appendChild(e("p","hint","Aturan satu tugas belum tentu berlaku untuk tugas lain. Cek instruksi dosen sebelum mulai."));
+[["gr","✓ Boleh untuk membantu belajar","AI boleh dipakai sebagai alat bantu.","Pasal 4 ayat 1","Artinya: memahami materi, mencari ide awal dan sumber, menyusun kerangka, dan menyunting bahasa secara terbatas.","Contoh: meminta AI menjelaskan istilah “validitas konstruk”, lalu mengeceknya ke buku."],["am","! Tergantung tugas","Batas ditetapkan dosen. Bila belum ada, peraturan mewajibkan persetujuan dosen dulu.","Pasal 5","Artinya: penggunaan untuk memahami materi bisa berbeda ketentuannya dari penggunaan untuk jawaban akhir.","Contoh: tugas A membolehkan AI untuk ide awal, tugas B tidak membolehkan sama sekali."],["rd","× Tidak boleh","Menyerahkan karya yang sepenuhnya hasil AI, memakai AI di ujian tanpa izin, dan memasukkan data pribadi atau rahasia ke AI di luar kendali UNAIR tanpa dasar sah.","Pasal 4 ayat 5, Pasal 5 ayat 4 dan 5, Pasal 13 ayat 2","Artinya: karya dan data sensitif tetap menjadi tanggung jawabmu.","Contoh: menempel transkrip wawancara berisi identitas peserta ke chatbot publik."]].forEach(function(k){d.appendChild(e("div","leg1 "+k[0],null,[e("b","",k[1]),e("p","","Aturan resmi: "+k[2]),e("p","",k[4]),e("p","mut",k[5]),e("small","mut","Dasar: Perrek 24/2026, "+k[3])]))});
+d.appendChild(e("h3","","Kalau kamu masih ragu")).style.marginTop="14px";["1. Ada aturan dari dosen? Ikuti aturan itu.","2. Belum ada aturan? Tanyakan dosen sebelum memakai AI.","3. Ada data pribadi atau rahasia? Jangan unggah ke AI publik.","4. AI memberi informasi penting? Buka sumber aslinya dan periksa."].forEach(function(x){d.appendChild(e("p","",x))});
+d.appendChild(e("div","hint",null,[e("b","","Dasar aturan: Peraturan Rektor UNAIR 24/2026"),e("p","","Jika diminta masuk, gunakan email institusi UNAIR."),lnk("Buka dokumen peraturan",LINKS.aturan)]));
+d.appendChild(e("h3","","Kenapa begini?")).style.marginTop="16px";QA.forEach(function(x){d.appendChild(acc(x[0],null,[e("p","",x[1]),e("p","mut","Dasar: "+x[2])]))});
+var a=e("div","acts");a.appendChild(btn("Tugasku belum jelas","b",function(){go("rm")}));a.appendChild(btn("Aku komting","b o",function(){go("rk")}));a.appendChild(btn("Diminta mencatat penggunaan AI?","b o",function(){go("catatan")}));d.appendChild(a);d.appendChild(e("p","mut","Ringkasan mahasiswa, bukan pengganti teks resmi.")).style.marginTop="12px"};
+(function(){var s=$("strip"),t=Math.floor(Date.now()/864e5)%NEWS.length;[0,1,2,3].forEach(function(k){var i=(t+k)%NEWS.length,n=NEWS[i],b=e("button","nc","",[e("span","badge",k===0?"Tahu nggak hari ini":n[0]),e("b","",n[1]),e("span","s",n[3])]);b.onclick=function(){go("news",i)};s.appendChild(b)});stat()})();
+function syncThemeButton(){var d=document.documentElement,b=$("tema"),dark=d.dataset.theme?d.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;if(!b)return;b.textContent=dark?"☀ Terang":"☾ Gelap";b.setAttribute("aria-pressed",String(dark));b.setAttribute("aria-label",dark?"Aktifkan mode terang":"Aktifkan mode gelap")}syncThemeButton();$("tema").onclick=function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;d.dataset.theme=dark?"light":"dark";syncThemeButton()};
+qbr();document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){go(b.dataset.go)}});
+</script></body></html>
